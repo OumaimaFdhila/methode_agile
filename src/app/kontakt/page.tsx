@@ -6,8 +6,8 @@ export default function KontaktPage(){
     return(
         <div className="relative top-[-4rem] w-full overflow-x-hidden flex flex-col">
             <div className="relative shadow-2xl w-full h-[70vh] overflow-hidden flex items-center justify-center">
-                <img src="/centre.jpg" alt="img" className="brightness-50 absolute w-full h-[150%] translate-y-[-15%]" />
-                <h2 className="z-10 text-9xl font-bold text-center text-white translate-y-[40%]">KONTAKTIEREN SIE UNS</h2>
+                <img src="/centre.jpg" alt="img" className="brightness-50 absolute w-full h-[150%] translate-y-[5%]" />
+                <h2 className="z-10 text-7xl font-bold text-center text-white translate-y-[40%]">KONTAKTIEREN SIE UNS</h2>
             </div>
             <div className="z-10 relative w-full overflow-hidden flex items-center justify-evenly mt-24 flex-wrap">
                 <div className="flex flex-col w-[500px]">

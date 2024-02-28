@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuToggle, NavbarMenuItem, NavbarMenu} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, Button} from "@nextui-org/react";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
@@ -8,9 +8,13 @@ import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { TbLogout } from "react-icons/tb";
 
+import { useSession, signIn, signOut} from "next-auth/react";
+
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const {data:session} = useSession()
+  console.log(session)
 
 
   const menuItems = [
@@ -62,7 +66,7 @@ export default function Nav() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="#" color="foreground">
+            <Link href="/kontakt" color="foreground">
             Kontakt
             </Link>
           </NavbarItem>
@@ -86,32 +90,35 @@ export default function Nav() {
           startContent={<IoSearchSharp size={18} />}
           type="search"
         />
-        <Dropdown placement="bottom-end">
+        {session && session.user ?
+          <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
               isBordered
               as="button"
               className="transition-transform "
               color="default"
-              name="Jason Hughes"
+              name={session.user.name as string}
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src={session.user.image as string}
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold text-[#D3570D]">Signed in as</p>
-              <p className="font-semibold">Name@example.com</p>
+              <p className="font-semibold">{session.user.email}</p>
             </DropdownItem>
             <DropdownItem key="Profile"><MdAccountCircle className="inline-block"/> Profile</DropdownItem>
             <DropdownItem key="Dashboard"><MdOutlineSpaceDashboard className="inline-block"/> Dashboard</DropdownItem>
             <DropdownItem key="Settings"><MdOutlineAdminPanelSettings className="inline-block"/> Settings</DropdownItem>
             <DropdownItem key="Help & Feedback"><IoIosHelpCircleOutline className="inline-block"/> Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger" >
+            <DropdownItem key="logout" color="danger" onClick={()=>signOut()}>
               <TbLogout className="inline-block"/> Log Out
             </DropdownItem>
           </DropdownMenu>
-          </Dropdown>
+          </Dropdown>:
+          <Button color="warning" onClick={()=>signIn("google")}>signIn</Button>
+        }
           
         
       </NavbarContent>
