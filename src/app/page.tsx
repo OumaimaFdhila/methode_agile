@@ -10,10 +10,10 @@ import { LuPencilRuler } from "react-icons/lu";
 
 export default function Home() {
   return (
-      <div className="relative flex flex-col items-center w-full">
+      <div className="relative flex flex-col items-center w-full overflow-x-hidden top-[-4rem]">
       
         <div className="relative shadow-2xl w-full h-[calc(100vh_-_4rem)] mb-24">
-          <img src="centre.jpg" alt="img" className="brightness-50 absolute w-full h-[100vh] translate-y-[-4rem]" />
+          <img src="centre.jpg" alt="img" className="brightness-50 absolute w-full h-[100vh]" />
             <div className="absolute top-[50%] translate-y-[-40%] lg:left-[600px] lg:w-[900px]">
               <p className="text-[#D3570D] font-bold text-lg mb-4 ml-8 lg:ml-8">In der Welt der digitalen Kundenservice-Lösungen</p>
               <div className="pl-8">

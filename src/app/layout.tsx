@@ -18,7 +18,7 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <body>
       <Providers>
-          <main className="overflow-hidden">
+          <main>
             <Nav/>
             {children}
             <Footer/>
