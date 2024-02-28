@@ -5,7 +5,7 @@ export const SearchIcon = ({
   width,
   height,
   ...props
-}) => (
+}:any) => (
   <svg
     aria-hidden="true"
     fill="none"
