@@ -4,7 +4,7 @@ import { FaLinkedinIn } from "react-icons/fa6";
 import { Link } from "@nextui-org/react";
 export default function footer(){
     return(
-        <div className="relative  mb-5 bottom-[-550px] mt-20 bg-black w-full h-[150px] flex flex-col justify-evenly px-3">
+        <div className="relative bg-black w-full h-[150px] flex flex-col justify-evenly px-3">
         <div className=" flex  justify-evenly items-center">
             <img src="light_logo.png" className="h-10" alt="logo" />
             <p className="text-lg font-bold text-[#d3570d]">Anruf tätigen: +49 15215894603</p>

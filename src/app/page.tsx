@@ -10,14 +10,14 @@ import { LuPencilRuler } from "react-icons/lu";
 
 export default function Home() {
   return (
-      <div className="">
+      <div className="relative flex flex-col items-center w-full">
       
-        <div className="relative top-[-100px] shadow-b-2xl ">
-          <img src="centre.jpg" alt="img" className="h-[110svh] w-full brightness-50" />
-            <div className="absolute top-[50%] translate-y-[-40%]  lg:left-[600px] lg:w-[900px]">
+        <div className="relative shadow-2xl w-full h-[calc(100vh_-_4rem)] mb-24">
+          <img src="centre.jpg" alt="img" className="brightness-50 absolute w-full h-[100vh] translate-y-[-4rem]" />
+            <div className="absolute top-[50%] translate-y-[-40%] lg:left-[600px] lg:w-[900px]">
               <p className="text-[#D3570D] font-bold text-lg mb-4 ml-8 lg:ml-8">In der Welt der digitalen Kundenservice-Lösungen</p>
               <div className="pl-8">
-                <p className="text-white font-bold text-5xl  lg:mb-5 lg:ml-0">IHR GLOBALER STRATEGISCHER PARTNER</p>
+                <p className="text-white font-bold text-5xl lg:mb-5 lg:ml-0">IHR GLOBALER STRATEGISCHER PARTNER</p>
                 <p className="text-white  w-[90%] mb-4 lg:ml-0 text-lg">Willkommen bei MegaTel – Ihrem erstklassigen Partner für professionelle Callcenter-Dienstleistungen ! Wir präsentieren Ihnen heute unsere erstklassigen Callcenter-Dienstleistungen, die speziell auf die Bedürfnisse von Großunternehmen zugeschnitten sind.</p>
                 <Button  className="text-white bg-[#D3570D]" variant="shadow">
                   See More
@@ -26,8 +26,7 @@ export default function Home() {
             </div>
         </div>
       
-      
-        <div className=" relative flex flex-row justify-evenly   ">
+        <div className="relative flex justify-evenly w-full mb-24">
           
           <div className="h-[100%] w-[40%] pt-16  ">
             <p className="text-[#2D4059] font-bold text-lg mb-4 ml-8 lg:ml-8">Erfahrung und Stabilität</p>
@@ -63,12 +62,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className=" relative top-28   ">
+        <div className="relative mb-20">
           
           <p className="text-[#d3570d] font-semibold text-center text-2xl mb-5  ">Stabilität und Qualität</p>
           <p className="font-semibold text-center text-5xl mb-10">Qualitätsservice</p>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center">
+          <div className="flex flex-col lg:flex-row justify-center items-center">
           <div className="h-[400px] w-[80%] lg:w-[300px] lg:h-[320px] p-3 lg:p-0 shadow-2xl rounded-3xl mb-10 text-center flex flex-col pt-16 items-center lg:pt-16">
             <BsLightbulb size={50} color="#d3570d" className="mb-2"/>
             <p className="text-2xl text-[#d3570d] mb-2 font-semibold">Flexibilität</p>
@@ -84,15 +83,15 @@ export default function Home() {
           <p className="text-2xl text-[#d3570d] mb-2 font-semibold">Technologie</p>
             <p className=" mb-4">Modernste Kommunikationstechnologien Sicherheitsprotokolle für den Datenschutz</p>
           </div>
-        </div>
+          </div>
         </div>
       
-      <div  className="relative top-60 left-40 w-[80%] bg-[#EEEEEE] rounded-3xl  flex flex-col items-center  py-5">
+      <div  className="relative w-[80%] bg-[#EEEEEE] rounded-3xl flex flex-col items-center py-5 mb-20">
 
       <div className="w-20 h-2 rounded-xl bg-[#d3570d] shadow-2xl mb-3"></div>
 
         <p className="text-center text-lg text-[#222831]">Nachhaltigkeit</p>
-        <p className="font-bold text-[#2d4059] w-[70%] text-inherit text-center  text-4xl mt-1  "> Engagiert dafür mit jüngeren Meinungen die Welt zu verändern für die nächste Generation!</p>
+        <p className="font-bold text-[#2d4059] w-[70%] text-inherit text-center text-4xl mt-1 "> Engagiert dafür mit jüngeren Meinungen die Welt zu verändern für die nächste Generation!</p>
       
       <div className=" flex flex-col  lg:flex-row lg:justify-between   ">
           
@@ -126,19 +125,19 @@ export default function Home() {
       </div>
       </div>
 
-      <div className="relative top-96 flex flex-col justify-center items-center ">
+      <div className="relative flex flex-col justify-center items-center mb-20">
         <div className=" flex w-[80%] justify-center rounded-3xl  p-5 mb-14">
           <div className=" w-[50%]  ">
             <p className="text-[#d3570d] font-semibold text-start text-2xl mb-3  ">Nachhaltigkeit</p>
             <p className="font-semibold text-[#222831] text-start text-5xl ">Unsere Standorte</p>
           </div>
 
-          <div className="w-[50%] ">
+          <div className="w-[50%]">
             <p className="text-[#1b2735]">Unsere hauptfilialen sind es in Tunesien und Bulgarien und wir sind stolz darauf, lokale Präsenz in strategisch wichtigen Regionen zu zeigen. Doch gehen wir über physische Grenzen hinaus. Unsere Vernetzung reicht weltweit, da wir digital mit jedem unserer Partner und Mitarbeiter verbunden sind.</p>
           </div>
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center ">
           <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 shadow-2xl ">
             <p className="text-[#d3570d] font-semibold text-start text-3xl mb-3  ">Tunesien</p>
             <p className="font-semibold text-[#222831] text-start text-xl ">2050 Tunis Straße, Ben Arous</p>
@@ -157,7 +156,7 @@ export default function Home() {
       </div>
       
 
-      <div className="relative top-[500px] flex flex-col justify-center items-center  pt-10">
+      <div className="relative flex flex-col justify-center items-center pt-10 mb-20">
       <p className="text-center text-lg text-[#222831]">Mit uns haben Sie Ihren Zukunft gesichert</p>
       <p className="font-bold text-[#2D4059] w-[70%] text-inherit text-center  text-4xl mt-1 mb-10 ">Wir sind ein weltweit führendes internationales Unternehmen</p>
       
