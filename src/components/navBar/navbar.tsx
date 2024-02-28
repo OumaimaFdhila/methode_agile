@@ -9,7 +9,7 @@ import { IoIosHelpCircleOutline } from "react-icons/io";
 import { TbLogout } from "react-icons/tb";
 import { usePathname } from "next/navigation";
 import { useSession, signIn, signOut} from "next-auth/react";
-
+import Image from 'next/image'
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -50,7 +50,13 @@ export default function Nav() {
         className="sm:hidden"
       />
       <NavbarBrand>
-        <img src="logo.png" alt="img" width={150}/>
+        <Image
+          src="/dark_logo.png"
+          width={150}
+          height={90}
+          alt="Picture of the author"
+          className="ml-12"
+        />
       </NavbarBrand>
     </NavbarContent>
         
@@ -60,8 +66,8 @@ export default function Nav() {
               Home
             </Link>
           </NavbarItem>
-          <NavbarItem isActive={pathName.startsWith("#")}>
-            <Link color="foreground" href="#">
+          <NavbarItem isActive={pathName.startsWith("/uber")}>
+            <Link color="foreground" href="/uber">
             Über uns
             </Link>
           </NavbarItem>

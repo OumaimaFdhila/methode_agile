@@ -2,11 +2,18 @@ import { FaFacebook } from "react-icons/fa";
 import { BsInstagram } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { Link } from "@nextui-org/react";
+import Image from 'next/image'
 export default function footer(){
     return(
-        <div className="relative bg-black w-full h-[150px] flex flex-col justify-evenly px-3">
+        <div className="relative bg-black w-full flex flex-col justify-evenly px-3">
         <div className=" flex  justify-evenly items-center">
-            <img src="light_logo.png" className="h-10" alt="logo" />
+            <Image
+            src="/light_logo.png"
+            width={150}
+            height={50}
+            alt="Picture of the author"
+            className="ml-12"
+            />
             <p className="text-lg font-bold text-[#d3570d]">Anruf tätigen: +49 15215894603</p>
             <div>
                 <div className="flex flex-row justify-evenly items-baseline ">
@@ -16,7 +23,7 @@ export default function footer(){
                 </div>
             </div>
         </div>
-        <div className="border-t-2  border-t-white flex justify-start  ">
+        <div className="border-t-2  border-t-white flex justify-start mb-3  ">
         <Link href="#"><p className="text-white mr-5 mt-2 ">Terms of use</p></Link>
         <Link href="#"><p className="text-white mr-5 mt-2">Privacy policy</p></Link>
         <Link href="#"><p className="text-white mr-5 mt-2">Accessibility</p></Link>

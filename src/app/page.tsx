@@ -1,6 +1,6 @@
 import { FaRecycle } from "react-icons/fa";
 import React from "react";
-import {Card, CardHeader, CardBody, CardFooter, Image, Button} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, CardFooter, Image, Button,Link} from "@nextui-org/react";
 import { BsLightbulb } from "react-icons/bs";
 import { BsPersonCheck } from "react-icons/bs";
 import { BsMotherboard } from "react-icons/bs";
@@ -19,14 +19,14 @@ export default function Home() {
               <div className="pl-8">
                 <p className="text-white font-bold text-5xl lg:mb-5 lg:ml-0">IHR GLOBALER STRATEGISCHER PARTNER</p>
                 <p className="text-white  w-[90%] mb-4 lg:ml-0 text-lg">Willkommen bei MegaTel – Ihrem erstklassigen Partner für professionelle Callcenter-Dienstleistungen ! Wir präsentieren Ihnen heute unsere erstklassigen Callcenter-Dienstleistungen, die speziell auf die Bedürfnisse von Großunternehmen zugeschnitten sind.</p>
-                <Button  className="text-white bg-[#D3570D]" variant="shadow">
-                  See More
+                <Button as={Link} href="#content"  className="text-white text-lg font-semibold bg-[#D3570D]" variant="shadow">
+                Mehr sehen
                 </Button>
               </div>
             </div>
         </div>
       
-        <div className="relative flex justify-evenly w-full mb-24">
+        <div id="content" className="relative flex justify-evenly w-full mb-24">
           
           <div className="h-[100%] w-[40%] pt-16  ">
             <p className="text-[#2D4059] font-bold text-lg mb-4 ml-8 lg:ml-8">Erfahrung und Stabilität</p>
@@ -156,12 +156,12 @@ export default function Home() {
       </div>
       
 
-      <div className="relative flex flex-col justify-center items-center pt-10 mb-20">
+      <div className="relative flex flex-col justify-center items-center pt-10 mb-5">
       <p className="text-center text-lg text-[#222831]">Mit uns haben Sie Ihren Zukunft gesichert</p>
       <p className="font-bold text-[#2D4059] w-[70%] text-inherit text-center  text-4xl mt-1 mb-10 ">Wir sind ein weltweit führendes internationales Unternehmen</p>
       
       
-      <div className="flex justify-between ">
+      <div className="flex justify-between mb-10">
           <Card isFooterBlurred className="w-[300px] h-[300px] mr-10">
           <CardHeader className="absolute z-10 top-1 flex-col items-start">
           </CardHeader>
@@ -196,6 +196,7 @@ export default function Home() {
           </CardFooter>
         </Card>
       </div>
+      <Button href="/uber" as={Link} variant="shadow" className="text-white text-lg font-semibold bg-[#D3570D]">ÜBER UNS</Button>
       </div>
 
     </div>
