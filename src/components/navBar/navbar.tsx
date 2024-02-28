@@ -14,7 +14,6 @@ import { useSession, signIn, signOut} from "next-auth/react";
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const {data:session} = useSession()
-
   const pathName = usePathname()
 
 
@@ -118,7 +117,7 @@ export default function Nav() {
             </DropdownItem>
           </DropdownMenu>
           </Dropdown>:
-          <Button color="warning" onClick={()=>signIn("google")}>signIn</Button>
+          <Button className="bg-[#D3570D] text-white rounded-lg" onClick={()=>signIn("google")}>SIGN IN</Button>
         }
           
         
@@ -140,3 +139,4 @@ export default function Nav() {
     </Navbar>
   );
 }
+
