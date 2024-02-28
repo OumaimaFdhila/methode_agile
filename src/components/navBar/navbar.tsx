@@ -14,7 +14,7 @@ import { useSession, signIn, signOut} from "next-auth/react";
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const {data:session} = useSession()
-  console.log(session)
+
   const pathName = usePathname()
 
 
