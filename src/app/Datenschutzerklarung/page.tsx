@@ -1,7 +1,7 @@
 export default function Datenschutzerklarung(){
     return(
         <div className="relative flex justify-center items-center px-20 py-10">
-            <div className="bg-[#EEEEEE]/30 w-[80%] h-[80%] rounded-3xl p-20">
+            <div className=" w-[80%] h-[80%] rounded-3xl p-20 shadow-xl border-1">
                 <p className="text-3xl  text-[#d3570d] mb-5">DATENSCHUTZERKLÄRUNG</p>
                 <p className="text-5xl font-bold text-[#2d4059] mb-5">Wer wir sind</p>
                 <p className="text-lg  text-[#222831] mb-5">Textvorschlag: Die Adresse unserer Website ist: http://mega-tel.de.</p>
