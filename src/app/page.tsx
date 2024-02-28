@@ -1,13 +1,13 @@
-import {Button} from "@nextui-org/react";
 import { FaRecycle } from "react-icons/fa";
 import React from "react";
+import {Card, CardHeader, CardBody, CardFooter, Image, Button} from "@nextui-org/react";
 import { BsLightbulb } from "react-icons/bs";
 import { BsPersonCheck } from "react-icons/bs";
 import { BsMotherboard } from "react-icons/bs";
 import { FaRegClock } from "react-icons/fa6";
 import { FaComputer } from "react-icons/fa6";
 import { LuPencilRuler } from "react-icons/lu";
-import {Image} from "@nextui-org/react";
+
 export default function Home() {
   return (
       <div className="">
@@ -125,7 +125,80 @@ export default function Home() {
         </div>
       </div>
       </div>
+
+      <div className="relative top-96 flex flex-col justify-center items-center ">
+        <div className=" flex w-[80%] justify-center rounded-3xl  p-5 mb-14">
+          <div className=" w-[50%]  ">
+            <p className="text-[#d3570d] font-semibold text-start text-2xl mb-3  ">Nachhaltigkeit</p>
+            <p className="font-semibold text-[#222831] text-start text-5xl ">Unsere Standorte</p>
+          </div>
+
+          <div className="w-[50%] ">
+            <p className="text-[#1b2735]">Unsere hauptfilialen sind es in Tunesien und Bulgarien und wir sind stolz darauf, lokale Präsenz in strategisch wichtigen Regionen zu zeigen. Doch gehen wir über physische Grenzen hinaus. Unsere Vernetzung reicht weltweit, da wir digital mit jedem unserer Partner und Mitarbeiter verbunden sind.</p>
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center">
+          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 shadow-2xl ">
+            <p className="text-[#d3570d] font-semibold text-start text-3xl mb-3  ">Tunesien</p>
+            <p className="font-semibold text-[#222831] text-start text-xl ">2050 Tunis Straße, Ben Arous</p>
+          </div>
+
+          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 ml-16 shadow-2xl">
+            <p className="text-[#d3570d] font-semibold text-start text-3xl mb-3  ">Bulgarien</p>
+            <p className="font-semibold text-[#222831] text-start text-xl ">1000 Sofia Straße, Knyaz Boris</p>
+          </div>
+          
+          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 ml-16 shadow-2xl">
+            <p className="text-[#d3570d] font-semibold text-start text-3xl mb-3  ">Weltweit</p>
+            <p className="font-semibold text-[#222831] text-start text-xl ">Homeoffice</p>
+          </div>
+        </div>
+      </div>
       
+
+      <div className="relative top-[500px] flex flex-col justify-center items-center  pt-10">
+      <p className="text-center text-lg text-[#222831]">Mit uns haben Sie Ihren Zukunft gesichert</p>
+      <p className="font-bold text-[#2D4059] w-[70%] text-inherit text-center  text-4xl mt-1 mb-10 ">Wir sind ein weltweit führendes internationales Unternehmen</p>
+      
+      
+      <div className="flex justify-between ">
+          <Card isFooterBlurred className="w-[300px] h-[300px] mr-10">
+          <CardHeader className="absolute z-10 top-1 flex-col items-start">
+          </CardHeader>
+          <Image
+            removeWrapper
+            alt="Card example background"
+            className="z-0 w-full h-full scale-100 -translate-y-7 object-cover"
+            src="person.jpg"
+          />
+          <CardFooter className="absolute bg-[#2d4059]/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+            <div>
+              <p className="text-black text-lg">Mourad Gherab</p>
+              <p className="text-black text-tiny">CEO</p>
+            </div>
+          </CardFooter>
+        </Card>
+
+        <Card isFooterBlurred className="h-[300px] w-[300px]">
+          <CardHeader className="absolute z-10 top-1 flex-col items-start">
+          </CardHeader>
+          <Image
+            removeWrapper
+            alt="Card example background"
+            className="z-0 w-full h-full scale-100 -translate-y-7 object-cover"
+            src="person.jpg"
+          />
+          <CardFooter className="absolute bg-[#2d4059]/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+            <div>
+              <p className="text-black text-lg">Admir Kolasinac</p>
+              <p className="text-black text-tiny">COO,CEO</p>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+      </div>
+
     </div>
     
   );
