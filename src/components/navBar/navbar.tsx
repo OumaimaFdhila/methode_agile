@@ -7,7 +7,7 @@ import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { TbLogout } from "react-icons/tb";
-
+import { usePathname } from "next/navigation";
 import { useSession, signIn, signOut} from "next-auth/react";
 
 
@@ -15,6 +15,7 @@ export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const {data:session} = useSession()
   console.log(session)
+  const pathName = usePathname()
 
 
   const menuItems = [
@@ -55,22 +56,22 @@ export default function Nav() {
     </NavbarContent>
         
         <NavbarContent className="hidden sm:flex gap-3">
-        <NavbarItem isActive>
+        <NavbarItem isActive={pathName==="/"}>
             <Link href="/" aria-current="page" color="foreground" >
               Home
             </Link>
           </NavbarItem>
-          <NavbarItem>
+          <NavbarItem isActive={pathName.startsWith("#")}>
             <Link color="foreground" href="#">
             Über uns
             </Link>
           </NavbarItem>
-          <NavbarItem>
+          <NavbarItem isActive={pathName.startsWith("/kontakt")}>
             <Link href="/kontakt" color="foreground">
             Kontakt
             </Link>
           </NavbarItem>
-          <NavbarItem>
+          <NavbarItem isActive={pathName.startsWith("/Datenschutzerklarung")}>
             <Link color="foreground" href="/Datenschutzerklarung">
             Datenschutzerklärung 
             </Link>
@@ -124,7 +125,7 @@ export default function Nav() {
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem key={`${item}-${index}`} isActive={pathName.startsWith("/")}>
             <Link
               color="foreground"
               className="w-full"
