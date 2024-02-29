@@ -55,7 +55,7 @@ export default function Nav() {
           width={150}
           height={90}
           alt="Picture of the author"
-          className="ml-12"
+          className=""
         />
       </NavbarBrand>
     </NavbarContent>

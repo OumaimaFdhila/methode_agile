@@ -12,9 +12,9 @@ export default function footer(){
             width={150}
             height={50}
             alt="Picture of the author"
-            className="ml-12"
+            className="mr-1"
             />
-            <p className="text-lg font-bold text-[#d3570d]">Anruf tätigen: +49 15215894603</p>
+            <p className="text-lg  font-bold text-[#d3570d] text-center mr-1">Anruf tätigen: +49 15215894603</p>
             <div>
                 <div className="flex flex-row justify-evenly items-baseline ">
                     <Link href="#"><FaFacebook className="w-8 h-8  mt-[5px]" style={{color:"white"}} /></Link>

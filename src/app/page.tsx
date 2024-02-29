@@ -26,18 +26,18 @@ export default function Home() {
             </div>
         </div>
       
-        <div id="content" className="relative flex justify-evenly w-full mb-24">
+        <div id="content" className="relative lg:flex lg:justify-evenly lg:w-full mb-24">
           
-          <div className="h-[100%] w-[40%] pt-16  ">
+          <div className="h-[100%] w-full lg:w-[40%] pt-16  ">
             <p className="text-[#2D4059] font-bold text-lg mb-4 ml-8 lg:ml-8">Erfahrung und Stabilität</p>
             <div className="pl-8">
-              <p className="text-black font-bold text-5xl  lg:mb-6 lg:ml-0">7 Jahre ungeschlagener Erfolg</p>
+              <p className="text-black font-bold text-5xl  mb-6  lg:ml-0">7 Jahre ungeschlagener Erfolg</p>
               <p className="text-[#222831]  w-[90%] mb-4 lg:ml-0 text-lg">MegaTel ist ein führendes Callcenter-Unternehmen, das sich auf herausragende Kommunikationslösungen spezialisiert hat. Mit langjähriger Erfahrung bieten wir Ihnen qualitativ hochwertige Dienstleistungen, die auf Ihre individuellen Bedürfnisse zugeschnitten sind.</p>
             </div>
           <div/>
           </div>
           
-          <div className=" flex  justify-center w-[30%] top-[-150px]">
+          <div className=" flex  justify-center items-center lg:w-[30%] w-full ">
             <div className="  flex flex-col mr-5 ">
             <div className=" bg-[#2D4059] rounded-3xl shadow-xl w-[200px] h-[200px] mb-5 flex flex-col justify-center items-center">
               <p className="text-white text-5xl mb-3">19+</p>
@@ -48,7 +48,6 @@ export default function Home() {
             <p className="text-[#222831] text-lg text-center">Jahrelange Erfahrung mit stolz.</p>
             </div>
             </div>
-            
             <div className=" flex flex-col  mt-20">
             <div className="rounded-3xl shadow-2xl  w-[200px] h-[200px] mb-5 flex flex-col justify-center items-center border-1">
             <p className="text-[#222831] text-5xl mb-3">10+</p>
@@ -68,17 +67,17 @@ export default function Home() {
           <p className="font-semibold text-center text-5xl mb-10">Qualitätsservice</p>
 
           <div className="flex flex-col lg:flex-row justify-center items-center">
-          <div className="h-[400px] w-[80%] lg:w-[300px] lg:h-[320px] p-3 lg:p-0 shadow-2xl rounded-3xl mb-10 text-center flex flex-col pt-16 items-center lg:pt-16">
+          <div className="h-[320px] w-[80%] lg:w-[300px]  p-3 lg:p-0 shadow-2xl rounded-3xl mb-10 text-center flex flex-col pt-16 items-center lg:pt-16">
             <BsLightbulb size={50} color="#d3570d" className="mb-2"/>
             <p className="text-2xl text-[#d3570d] mb-2 font-semibold">Flexibilität</p>
             <p className=" mb-4">Flexible Dienstleistungen nach Bedarf Skalierbare Lösungen für Unternehmenswachstum</p>
           </div>
-          <div className="h-[400px] w-[80%] lg:w-[300px] lg:h-[320px] p-3 shadow-2xl rounded-3xl mb-10 mx-10 bg-[#d3570d] text-center flex flex-col pt-16 lg:pt-16 items-center " >
+          <div className=" w-[80%] lg:w-[300px] h-[320px] p-3 shadow-2xl rounded-3xl mb-10 mx-10 bg-[#d3570d] text-center flex flex-col pt-16 lg:pt-16 items-center " >
           <BsPersonCheck size={50} color="#ffffff" className="mb-2"/>
           <p className="text-2xl text-white mb-2 font-semibold">Expertise</p>
             <p className=" mb-4 text-white">Spezialisierte Teams mit fundiertem Fachwissen Kontinuierliche Schulungen für Mitarbeiter</p>
           </div>
-          <div className="h-[400px] w-[80%] lg:w-[300px] lg:h-[320px] p-3 lg:p-0 shadow-2xl rounded-3xl mb-10 text-center flex flex-col pt-16 items-center lg:px-1 lg:pt-16">
+          <div className=" w-[80%] lg:w-[300px] h-[320px] p-3 lg:p-0 shadow-2xl rounded-3xl mb-10 text-center flex flex-col pt-16 items-center lg:px-1 lg:pt-16">
           <BsMotherboard size={50} color="#d3570d" className="mb-2"/>
           <p className="text-2xl text-[#d3570d] mb-2 font-semibold">Technologie</p>
             <p className=" mb-4">Modernste Kommunikationstechnologien Sicherheitsprotokolle für den Datenschutz</p>
@@ -91,7 +90,7 @@ export default function Home() {
       <div className="w-20 h-2 rounded-xl bg-[#d3570d] shadow-2xl mb-3"></div>
 
         <p className="text-center text-lg text-[#222831]">Nachhaltigkeit</p>
-        <p className="font-bold text-[#2d4059] w-[70%] text-inherit text-center text-4xl mt-1 "> Engagiert dafür mit jüngeren Meinungen die Welt zu verändern für die nächste Generation!</p>
+        <p className="font-bold text-[#2d4059] w-[70%] text-inherit text-center text-2xl lg:text-4xl mt-1 mb-5 "> Engagiert dafür mit jüngeren Meinungen die Welt zu verändern für die nächste Generation!</p>
       
       <div className=" flex flex-col  lg:flex-row lg:justify-between   ">
           
@@ -125,30 +124,30 @@ export default function Home() {
       </div>
       </div>
 
-      <div className="relative flex flex-col justify-center items-center mb-20">
-        <div className=" flex w-[80%] justify-center rounded-3xl  p-5 mb-14">
-          <div className=" w-[50%]  ">
-            <p className="text-[#d3570d] font-semibold text-start text-2xl mb-3  ">Nachhaltigkeit</p>
-            <p className="font-semibold text-[#222831] text-start text-5xl ">Unsere Standorte</p>
+      <div className="relative flex flex-col justify-center items-center mb-12 px-5">
+        <div className=" flex flex-col lg:flex-row  lg:w-[80%] justify-center items-center rounded-3xl  p-5 mb-14">
+          <div className=" w-full lg:w-[50%]  ">
+            <p className="text-[#d3570d] font-semibold text-center lg:text-start text-2xl mb-3  ">Nachhaltigkeit</p>
+            <p className="font-semibold text-[#222831] text-center lg:text-start text-5xl mb-5 lg:mb-0 ">Unsere Standorte</p>
           </div>
 
-          <div className="w-[50%]">
-            <p className="text-[#1b2735]">Unsere hauptfilialen sind es in Tunesien und Bulgarien und wir sind stolz darauf, lokale Präsenz in strategisch wichtigen Regionen zu zeigen. Doch gehen wir über physische Grenzen hinaus. Unsere Vernetzung reicht weltweit, da wir digital mit jedem unserer Partner und Mitarbeiter verbunden sind.</p>
+          <div className="lg:w-[50%] w-[90svw]">
+            <p className="text-[#1b2735] text-center lg:text-start">Unsere hauptfilialen sind es in Tunesien und Bulgarien und wir sind stolz darauf, lokale Präsenz in strategisch wichtigen Regionen zu zeigen. Doch gehen wir über physische Grenzen hinaus. Unsere Vernetzung reicht weltweit, da wir digital mit jedem unserer Partner und Mitarbeiter verbunden sind.</p>
           </div>
         </div>
 
-        <div className="flex justify-between items-center ">
-          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 shadow-2xl ">
+        <div className="flex flex-col w-[100%svw] xl:flex-row justify-between items-center  ">
+          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 shadow-2xl mb-7 xl:mb-0  ">
             <p className="text-[#d3570d] font-semibold text-start text-3xl mb-3  ">Tunesien</p>
             <p className="font-semibold text-[#222831] text-start text-xl ">2050 Tunis Straße, Ben Arous</p>
           </div>
 
-          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 ml-16 shadow-2xl">
+          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 xl:ml-16 shadow-2xl mb-7 xl:mb-0">
             <p className="text-[#d3570d] font-semibold text-start text-3xl mb-3  ">Bulgarien</p>
             <p className="font-semibold text-[#222831] text-start text-xl ">1000 Sofia Straße, Knyaz Boris</p>
           </div>
           
-          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 ml-16 shadow-2xl">
+          <div className="bg-[#EEEEEE] w-[350px] h-[200px] rounded-3xl p-5 xl:ml-16  shadow-2xl">
             <p className="text-[#d3570d] font-semibold text-start text-3xl mb-3  ">Weltweit</p>
             <p className="font-semibold text-[#222831] text-start text-xl ">Homeoffice</p>
           </div>
@@ -161,8 +160,8 @@ export default function Home() {
       <p className="font-bold text-[#2D4059] w-[70%] text-inherit text-center  text-4xl mt-1 mb-10 ">Wir sind ein weltweit führendes internationales Unternehmen</p>
       
       
-      <div className="flex justify-between mb-10">
-          <Card isFooterBlurred className="w-[300px] h-[300px] mr-10">
+      <div className="flex flex-col lg:flex-row justify-between mb-10">
+          <Card isFooterBlurred className="w-[300px] h-[300px] lg:mr-10 mb-10">
           <CardHeader className="absolute z-10 top-1 flex-col items-start">
           </CardHeader>
           <Image
