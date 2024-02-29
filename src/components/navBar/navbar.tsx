@@ -129,20 +129,45 @@ export default function Nav() {
         
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`} isActive={pathName.startsWith("/")}>
+          <NavbarMenuItem isActive={pathName==="/"}>
             <Link
               color="foreground"
               className="w-full"
-              href="#"
+              href="/"
               size="lg"
             >
-              {item}
+              Home
             </Link>
           </NavbarMenuItem>
-        ))}
+          <NavbarMenuItem isActive={pathName.startsWith("/uber")}>
+            <Link
+              color="foreground"
+              className="w-full"
+              href="/uber"
+              size="lg"
+            >
+              Über uns
+            </Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem isActive={pathName.startsWith("/kontakt")}>
+            <Link color="foreground"
+              className="w-full"
+              href="/kontakt"
+              size="lg">
+            Kontakt
+            </Link>
+          </NavbarMenuItem>
+            <NavbarMenuItem isActive={pathName.startsWith("/Datenschutzerklarung")}>
+            <Link
+              color="foreground"
+              className="w-full"
+              href="/Datenschutzerklarung"
+              size="lg"
+            >
+              Über uns
+            </Link>
+          </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
 }
-

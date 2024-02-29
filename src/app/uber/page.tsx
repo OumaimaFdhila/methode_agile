@@ -8,7 +8,7 @@ export default function uber(){
         <div className="relative top-[-4rem] w-full overflow-x-hidden flex flex-col items-center">
             <div className="relative shadow-2xl w-full h-[70vh] overflow-hidden flex items-center justify-center mb-20">
                 <img src="/centre.jpg" alt="img" className="brightness-50 absolute w-full h-[150%] translate-y-[5%]" />
-                <h2 className="z-10 text-5xl lgtext-7xl font-bold text-end text-white translate-y-[40%] translate-x-[30%] ">ÜBER UNS</h2>
+                <h2 className="z-10 text-5xl lg:text-7xl font-bold text-end text-white translate-y-[40%] translate-x-[30%] ">ÜBER UNS</h2>
             </div>
             <div className="flex w-full lg:w-[80%] flex-col justify-center items-center  p-10 mb-20">
                 <p className="text-[#D3570D] text-center lg:text-start text-3xl lg:text-5xl font-bold mb-5">Wir sind ein weltweit führendes internationales Unternehmen</p>
