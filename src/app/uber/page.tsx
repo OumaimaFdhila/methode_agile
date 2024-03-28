@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import { useEffect } from "react";
-export default function uber(){
+export default function Uber(){
 
     useEffect(()=>{
         Aos.init()
