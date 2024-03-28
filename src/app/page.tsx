@@ -320,9 +320,9 @@ export default function Home() {
 
           <p className="text-center text-sm text-[#222831] sm:text-lg md:text-xl" data-aos="fade-down" data-aos-duration="1500">Mit uns haben Sie Ihren Zukunft gesichert</p>
 
-          <p className="font-bold text-[#2D4059] text-inherit text-center  text-lg  sm:text-2xl sm:mb-3 md:text-3xl md:mb-10  lg:text-4xl  " data-aos="fade-down" data-aos-duration="1500">Wir sind ein weltweit führendes internationales Unternehmen</p>
+          <p className="font-bold text-[#2D4059] text-inherit text-center mb-3  text-lg  sm:text-2xl sm:mb-3 md:text-3xl md:mb-10  lg:text-4xl  " data-aos="fade-down" data-aos-duration="1500">Wir sind ein weltweit führendes internationales Unternehmen</p>
 
-          <div className="w-full flex flex-col justify-center items-center sm:flex-row mb-3 sm:mb-5 md:mb-10   ">
+          <div className="w-full flex flex-col justify-center items-center sm:flex-row mb-5 md:mb-10   ">
 
             <Card isFooterBlurred className="w-[190px] h-[190px] mb-3 sm:mb-0 sm:mr-3 " data-aos="zoom-in" data-aos-duration="1500">
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
@@ -362,7 +362,7 @@ export default function Home() {
 
 
           </div>
-          <Button href="/uber" as={Link} variant="shadow" className="text-white w-[50%] animate-bounce text-lg font-semibold bg-[#D3570D]" data-aos="zoom-in" data-aos-anchor-placement="top-bottom" data-aos-duration="1500">ÜBER UNS</Button>
+          <Button href="/uber" as={Link} variant="shadow" className="text-white w-[50%] mb-3 animate-bounce text-lg font-semibold bg-[#D3570D]" data-aos="zoom-in" data-aos-anchor-placement="top-bottom" data-aos-duration="1500">ÜBER UNS</Button>
 
 
         </div>
