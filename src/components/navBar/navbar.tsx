@@ -27,6 +27,8 @@ export default function Nav() {
   return (
     <Navbar  onMenuOpenChange={setIsMenuOpen}
     maxWidth="xl"
+    isBordered
+    isBlurred={false}
     classNames={{
       item: [
         "flex",
@@ -55,7 +57,7 @@ export default function Nav() {
           width={150}
           height={90}
           alt="Picture of the author"
-          className=""
+          className="hover:animate-pulse"
         />
       </NavbarBrand>
     </NavbarContent>
@@ -84,18 +86,7 @@ export default function Nav() {
       </NavbarContent>
 
       <NavbarContent as="div" className="items-center" justify="end">
-        <Input
-          classNames={{
-            base: "max-w-full sm:max-w-[10rem] h-10",
-            mainWrapper: "h-full",
-            input: "text-small",
-            inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-          }}
-          placeholder="Type to search..."
-          size="sm"
-          startContent={<IoSearchSharp size={18} />}
-          type="search"
-        />
+
         {session && session.user ?
           <Dropdown placement="bottom-end">
           <DropdownTrigger>

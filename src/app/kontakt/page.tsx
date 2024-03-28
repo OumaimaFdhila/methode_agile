@@ -1,36 +1,70 @@
 "use client"
-import GoogleMapComponent from "@/components/map"
+import { Accordion, AccordionItem } from '@nextui-org/react'
+import Image from 'next/image'
+import Aos from 'aos'
+import "aos/dist/aos.css"
+import { useEffect } from 'react'
 
 export default function KontaktPage(){
-
+    useEffect(()=>{
+        Aos.init()
+      },[])
     return(
-        <div className="relative top-[-4rem] w-full overflow-x-hidden flex flex-col">
-            <div className="relative shadow-2xl w-full h-[70vh] overflow-hidden flex items-center justify-center">
-            <img src="/centre.jpg" alt="img" className="brightness-50 absolute w-full h-[150%] translate-y-[5%]" />
-            <h2 className="z-10 text-2xl lg:text-7xl font-bold text-end text-white translate-y-[40%] translate-x-[30%] ">KONTAKTIEREN SIE UNS</h2>
-        </div>
-        
-        
-        <div className="z-10  relative w-full overflow-hidden flex items-center justify-evenly mt-24 flex-wrap">
-                <div className="flex flex-col w-[500px]">
-                    <h2 className="text-3xl font-bold text-[#D3570D] mb-5 text-center lg:text-start">Unsere Hauptfiliale</h2>
-                    <h3 className="text-5xl font-bold text-black mb-4 text-center lg:text-start">Kontaktieren Sie uns</h3>
-                </div>
-                <p className="md:w-[40%] font-semibold text-md md:min-w-[500px] text-center md:text-start">Möchten Sie mehr darüber erfahren, wie MegaTel Ihr Unternehmen voranbringen kann? Kontaktieren Sie uns für eine maßgeschneiderte Beratung. Wir freuen uns darauf, mit Ihnen zusammenzuarbeiten und Ihre Kommunikationsziele zu erreichen.Entdecken Sie die Welt der erstklassigen Callcenter-Dienstleistungen mit MegaTel – Ihrem zuverlässigen Partner für exzellente Kommunikation!</p>
+
+    <div className="flex flex-col w-full h-full overflow-hidden ">
+            
+        <div id="content" className="h-[631px] w-full flex flex-col justify-center items-center overflow-hidden lg:flex-row lg:items-start lg:p-5">
+
+            <Image
+            src="/bg.jpeg"
+            alt="Picture of the author"
+            width={500}
+            height={500}
+            className="hidden lg:block rounded-tr-[50px] lg:brightness-50 lg:shadow-lg lg:shadow-[#2e4059] lg:h-[90%] lg:w-[50%] mr-5" 
+            data-aos="slide-right"
+            data-aos-duration="1500"
+            data-aos-anchor-placement="top-bottom"
+            
+            />
+
+
+            <div className="bg-[url('/bg.jpeg')] w-full h-full lg:bg-none lg:w-[50%] p-2 flex flex-col justify-center  lg:justify-start lg:mt-5">
+
+                <p className="text-[#2e4059] text-center text-xl sm:text-4xl  md:text-3xl font-bold lg:text-start " data-aos="fade-down"
+                data-aos-duration="1500"
+                data-aos-anchor-placement="top-bottom">Unsere Hauptfiliale</p>
+
+                <p className="text-[#D3570D] text-center text-2xl sm:text-4xl sm:mb-5  md:text-5xl font-bold mb-2 lg:text-start " data-aos="fade-down"
+                data-aos-duration="1500"
+                data-aos-anchor-placement="top-bottom">Kontaktieren Sie uns</p>
+
+                <p className="text-white text-pretty text-center text-[15px] sm:mb-lg lg:text-start   font-semibold lg:text-md lg:text-black mb-5" data-aos="fade-down"
+                data-aos-duration="1500"
+                data-aos-anchor-placement="top-bottom">Möchten Sie mehr darüber erfahren, wie MegaTel Ihr Unternehmen voranbringen kann? Kontaktieren Sie uns für eine maßgeschneiderte Beratung. Wir freuen uns darauf, mit Ihnen zusammenzuarbeiten und Ihre Kommunikationsziele zu erreichen.Entdecken Sie die Welt der erstklassigen Callcenter-Dienstleistungen mit MegaTel – Ihrem zuverlässigen Partner für exzellente Kommunikation!</p>
+
+                <p className=" text-[#2e4059] text-center text-xl sm:text-4xl  md:text-3xl font-bold lg:text-start mb-5" data-aos="fade-down"
+                data-aos-duration="1500"
+                data-aos-anchor-placement="top-bottom">Hauptsitz in Sofia</p>
+
+                <Accordion variant="light" isCompact itemClasses={{title:"text-[#D3570D]  font-bold text-lg"}} data-aos="fade-down"
+                data-aos-duration="1500"
+                data-aos-anchor-placement="top-bottom">
+                    <AccordionItem key="1" aria-label="Address" title="Address:"  >
+                        <p className='text-white lg:text-black'>1000 Sofia Straße, Knyaz Boris</p>
+                    </AccordionItem>
+                    <AccordionItem key="2" aria-label="Telefon" title="Telefon:" className='text-white lg:text-black'>
+                        <p className='text-white lg:text-black'>+4915215894603</p>
+                    </AccordionItem>
+                    <AccordionItem key="3" aria-label="Email" title="Email:" >
+                        <p className='text-white lg:text-black'>marketing@mega-tel.de</p>
+                        <p className='text-white lg:text-black'>info@mega-tel.de</p>
+                    </AccordionItem>
+                </Accordion>
+
+
             </div>
-            <div className=" relative w-full flex flex-wrap  items-center  justify-evenly mt-20">
-                <div className="w-[500px] mb-10 mr-10 ">
-                    <h3 className="text-4xl font-bold mb-4 text-center lg:text-start">Hauptsitz in Sofia</h3>
-                    <div className="text-2xl font font-semibold text-center lg:text-start">Address:</div>
-                    <div className="mb-4 text-lg text-center lg:text-start">1000 Sofia Straße, Knyaz Boris</div>
-                    <div className="text-2xl font font-semibold text-center lg:text-start">Telefon:</div>
-                    <div className="mb-4 text-lg text-center lg:text-start">+4915215894603</div>
-                    <div className="text-2xl font font-semibold text-center lg:text-start">Email:</div>
-                    <div className="text-lg text-center lg:text-start">marketing@mega-tel.de</div>
-                    <div className="mb-2 text-lg text-center lg:text-start">info@mega-tel.de</div>
-                </div>
-                <GoogleMapComponent/>
-            </div>
+
         </div>
+    </div>
     )
 }

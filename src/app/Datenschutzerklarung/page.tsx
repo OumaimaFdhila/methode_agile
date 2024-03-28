@@ -1,6 +1,15 @@
+'use client'
+import { useEffect } from "react"
+import Aos from 'aos'
+import "aos/dist/aos.css"
 export default function Datenschutzerklarung(){
+    useEffect(()=>{
+        Aos.init()
+      },[])
     return(
-        <div className="relative flex justify-center items-center lg:px-20 lg:py-10">
+        <div className="relative flex justify-center items-center lg:px-20 lg:py-10" data-aos="slide-up"
+        data-aos-duration="1500"
+        data-aos-anchor-placement="top-bottom">
             <div className=" w-[80%] h-[80%] rounded-3xl lg:p-20 p-8 shadow-xl border-1 mb-10">
                 <p className="lg:text-3xl text-xl  text-[#d3570d] mb-5">DATENSCHUTZERKLÄRUNG</p>
                 <p className="g:text-5xl text-3xl font-bold text-[#2d4059] mb-5">Wer wir sind</p>
