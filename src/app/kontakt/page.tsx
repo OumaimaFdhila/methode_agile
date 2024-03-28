@@ -6,14 +6,16 @@ import "aos/dist/aos.css"
 import { useEffect } from 'react'
 
 export default function KontaktPage(){
+
     useEffect(()=>{
         Aos.init()
       },[])
+
     return(
 
-    <div className="flex flex-col w-full h-full overflow-hidden ">
+    <div className="flex flex-col w-full h-screen overflow-hidden  ">
             
-        <div id="content" className="h-[631px] w-full flex flex-col justify-center items-center overflow-hidden lg:flex-row lg:items-start lg:p-5">
+        <div className="h-full w-full flex flex-col justify-center items-center overflow-hidden lg:flex-row lg:items-start  lg:p-5">
 
             <Image
             src="/bg.jpeg"

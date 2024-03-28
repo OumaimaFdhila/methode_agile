@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function footer(){
     
     return(
-        <div className="relative bg-black w-full flex flex-col justify-evenly px-3 overflow-hidden mt-10">
+        <div className="relative bottom-0 bg-black w-full flex flex-col justify-evenly px-3 overflow-hidden ">
         <div className=" flex flex-col sm:flex-row justify-evenly items-center ">
             <Image
             src="/light_logo.png"
