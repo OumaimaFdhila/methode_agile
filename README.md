@@ -1,5 +1,5 @@
 ## Getting Started
-kan awel mara t7el el proje
+kan awel mara t7el el projet
 ```bash
 git clone https://github.com/OumaimaFdhila/methode_agile
 
