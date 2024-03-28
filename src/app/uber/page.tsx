@@ -1,13 +1,12 @@
-'use client'
+"use client"
 import { AiFillEuroCircle } from "react-icons/ai";
-import { FaComputer, FaPeopleGroup } from "react-icons/fa6";
+import { FaPeopleGroup } from "react-icons/fa6";
 import { GoGitBranch } from "react-icons/go";
-import { FaAward, FaRecycle, FaRegClock } from "react-icons/fa";
+import { FaAward, } from "react-icons/fa";
 import Image from 'next/image'
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import { useEffect } from "react";
-import { LuPencilRuler } from "react-icons/lu";
 export default function uber(){
 
     useEffect(()=>{
