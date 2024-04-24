@@ -4,11 +4,10 @@ import { BsInstagram } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { Link, Select, SelectItem } from "@nextui-org/react";
 import Image from 'next/image'
-import { useState } from "react";
+
 
 export default function footer(){
 
-    const [language,setLanguage]=useState("Deutsche")
 
 
     return(
