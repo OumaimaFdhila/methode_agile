@@ -1,10 +1,16 @@
+"use client"
 import { FaFacebook } from "react-icons/fa";
 import { BsInstagram } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa6";
-import { Link } from "@nextui-org/react";
+import { Link, Select, SelectItem } from "@nextui-org/react";
 import Image from 'next/image'
+import { useState } from "react";
+
 export default function footer(){
-    
+
+    const [language,setLanguage]=useState("Deutsche")
+
+
     return(
         <div className="relative bottom-0 bg-black w-full flex flex-col justify-evenly px-3 overflow-hidden ">
         <div className=" flex flex-col sm:flex-row justify-evenly items-center ">
@@ -23,6 +29,27 @@ export default function footer(){
                     <Link href="#"><FaLinkedinIn className="w-8 h-8" style={{color:"white"}} /></Link>
                 </div>
             </div>
+            {/* <div>
+                <Select
+                    label="Selected Language"
+                    value={language}
+                    // onSelectionChange={(e:any)=>{setLanguage(e.target.value)}}
+                    className="w-[180px] text-black flex-shrink-0"
+                    selectedKeys={[language]}
+                    >
+                    
+                        <SelectItem key="de" value="Deutsche" >
+                        Deutsche
+                        </SelectItem>
+                        <SelectItem key="en" value="English">
+                        English
+                        </SelectItem>
+                        <SelectItem key="fr" value="French">
+                        francais
+                        </SelectItem>
+                    
+                </Select>
+            </div> */}
         </div>
         <div className="border-t-2  border-t-white flex flex-col sm:flex-row justify-start mb-3  ">
         <Link href="#"><p className="text-white mr-5 mt-2 ">Terms of use</p></Link>

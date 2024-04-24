@@ -1,21 +1,27 @@
 "use client"
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, Button} from "@nextui-org/react";
-import { IoSearchSharp } from "react-icons/io5";
-import { MdAccountCircle } from "react-icons/md";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link,  DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, Button, Autocomplete, AutocompleteItem} from "@nextui-org/react";
+// import { IoSearchSharp } from "react-icons/io5";
+// import { MdAccountCircle } from "react-icons/md";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import { IoIosHelpCircleOutline } from "react-icons/io";
+// import { IoIosHelpCircleOutline } from "react-icons/io";
 import { TbLogout } from "react-icons/tb";
 import { usePathname } from "next/navigation";
-import { useSession, signIn, signOut} from "next-auth/react";
 import Image from 'next/image'
+import Auth_button from "../auth/log_button";
+import Sign_up_button from "../auth/sign_up_button";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import {useAuthState} from 'react-firebase-hooks/auth'
+import { useRouter } from "next/navigation"
 
 export default function Nav() {
+  const [user]=useAuthState(auth)
+  const userSession=sessionStorage.getItem('user')
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const {data:session} = useSession()
   const pathName = usePathname()
-
+  const Router=useRouter()
 
   const menuItems = [
     "Home",
@@ -78,47 +84,62 @@ export default function Nav() {
             Kontakt
             </Link>
           </NavbarItem>
-          <NavbarItem isActive={pathName.startsWith("/Datenschutzerklarung")}>
-            <Link color="foreground" href="/Datenschutzerklarung">
-            Datenschutzerklärung 
+          {user && userSession?
+          <NavbarItem isActive={pathName.startsWith("/profile")}>
+            <Link color="foreground" href="/profile">
+            Profile 
             </Link>
-          </NavbarItem>
+          </NavbarItem>:
+          <NavbarItem isActive={pathName.startsWith("/profile")}>
+          <Link color="foreground" href="/Datenschutzerklarung">
+          Datenschutzerklärung
+          </Link>
+        </NavbarItem>
+          }
+          {user && userSession?
+          <NavbarItem isActive={pathName.startsWith("/dashboard")}>
+            <Link color="foreground" href="/dashboard">
+            Dashboard 
+            </Link>
+          </NavbarItem>:<></>}
       </NavbarContent>
 
       <NavbarContent as="div" className="items-center" justify="end">
-
-        {session && session.user ?
-          <Dropdown placement="bottom-end">
-          <DropdownTrigger>
-            <Avatar
-              isBordered
-              as="button"
-              className="transition-transform "
-              color="default"
-              name={session.user.name as string}
-              size="sm"
-              src={session.user.image as string}
-            />
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold text-[#D3570D]">Signed in as</p>
-              <p className="font-semibold">{session.user.email}</p>
-            </DropdownItem>
-            <DropdownItem key="Profile"><MdAccountCircle className="inline-block"/> Profile</DropdownItem>
-            <DropdownItem key="Dashboard"><MdOutlineSpaceDashboard className="inline-block"/> Dashboard</DropdownItem>
-            <DropdownItem key="Settings"><MdOutlineAdminPanelSettings className="inline-block"/> Settings</DropdownItem>
-            <DropdownItem key="Help & Feedback"><IoIosHelpCircleOutline className="inline-block"/> Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger" onClick={()=>signOut()}>
-              <TbLogout className="inline-block"/> Log Out
-            </DropdownItem>
-          </DropdownMenu>
-          </Dropdown>:
-          <Button className="bg-[#D3570D] text-white rounded-lg" onClick={()=>signIn("google")}>SIGN IN</Button>
+        {!user && !userSession?
+        <div>
+        <Auth_button/>
+        <Sign_up_button/>
+        </div>:
+        <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <Avatar
+            isBordered
+            as="button"
+            className="transition-transform "
+            color="default"
+            // name={user.name as string}
+            size="sm"
+            src={user?.photoURL as string}
+          />
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Profile Actions" variant="flat">
+          <DropdownItem key="profile" className="h-14 gap-2">
+            <p className="font-semibold text-[#D3570D]">Signed in as</p>
+            <p className="font-semibold">{user?.email}</p>
+          </DropdownItem>
+          {/* <DropdownItem key="Profile"><MdAccountCircle className="inline-block"/> Profile</DropdownItem> */}
+          <DropdownItem href="/Datenschutzerklarung" key="Datenschutzerklärung"><MdOutlineSpaceDashboard className="inline-block"/> Datenschutzerklärung</DropdownItem>
+          <DropdownItem key="Settings"><MdOutlineAdminPanelSettings className="inline-block"/> Settings</DropdownItem>
+          {/* <DropdownItem key="language">
+          </DropdownItem> */}
+          <DropdownItem key="logout" color="danger" onClick={()=>{signOut(auth);sessionStorage.removeItem('user');Router.push('/')}}>
+            <TbLogout className="inline-block"/> Log Out
+          </DropdownItem>
+        </DropdownMenu>
+        </Dropdown>
         }
-          
-        
       </NavbarContent>
+
       <NavbarMenu>
           <NavbarMenuItem isActive={pathName==="/"}>
             <Link
