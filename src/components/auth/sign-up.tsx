@@ -15,6 +15,8 @@ import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
 import { AddUser } from "@/lib/firebase";
 import {parseDate} from "@internationalized/date";
 
+type admin = {email:string,password:string,id:string}
+
 export default function App(props:{isSign:(sign:boolean)=>void}) {
     const {isSign}=props
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -29,7 +31,7 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
     const [birthdate,setBirthDate]=useState(parseDate("2024-04-04"))
     const [role,setRole]=useState("")
     const [language,setLanguage]=useState("")
-
+    const [admins,setAdmins]=useState<admin[]>([])
 
     const [createUser]=useCreateUserWithEmailAndPassword(auth)
     const [SignIn]=useSignInWithEmailAndPassword(auth)
@@ -38,7 +40,14 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
 
     const date = new Date(birthdate.year, birthdate.month-1 , birthdate.day);//-1
 
-    const AddUserToBD=()=>{AddUser(email,password,firstName,lastName,date.toLocaleDateString(),country,language,role)
+
+    const AddUserToBD= async ()=>{
+      const id=(await AddUser(email,password,firstName,lastName,date.toLocaleDateString(),country,language,role)) as string
+      if(role=="Admin"){
+        setAdmins([...admins,{email:email,password:password,id:id}])
+        console.log("new admin added")
+      }
+      console.log(admins)
     }
   
     const toggleVisibility = () => setIsVisible(!isVisible);
@@ -48,6 +57,7 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
           const res = await createUser(email,password)
           console.log({res})
           sessionStorage.setItem('user','true')
+          const uid =res?.user.uid as string
           try{
             const res =await SignIn(email,password)
             console.log({res})
