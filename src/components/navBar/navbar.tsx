@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link,  DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, Button, Autocomplete, AutocompleteItem} from "@nextui-org/react";
 // import { IoSearchSharp } from "react-icons/io5";
 // import { MdAccountCircle } from "react-icons/md";
@@ -18,10 +18,14 @@ import { useRouter } from "next/navigation"
 
 export default function Nav() {
   const [user]=useAuthState(auth)
-  const userSession=sessionStorage.getItem('user')
+  const [userSession, setUserSession] = useState<string | null>(null)
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathName = usePathname()
   const Router=useRouter()
+
+  useEffect(()=>{
+    setUserSession(sessionStorage.getItem('user'))
+  },[])
 
   const menuItems = [
     "Home",
