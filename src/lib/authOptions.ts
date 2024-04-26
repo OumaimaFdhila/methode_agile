@@ -87,6 +87,7 @@ export const authOptions:AuthOptions = {
             }
 
             const user = await getUserByID(token.sub)
+            console.log("user: ",user)
 
             if(user){
                 token.role = user.role

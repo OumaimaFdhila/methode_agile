@@ -21,7 +21,7 @@ function checkLink(link:string, list:string[]){
 export default withAuth(
   async function middleware(req) {
     const token = await getToken({ req });
-    
+    console.log("token : ",token)
     const pathName = req.nextUrl.pathname
     
     if(pathName.startsWith("/api")){
