@@ -82,6 +82,7 @@ export const authOptions:AuthOptions = {
         },
         async jwt({token}){
             //check for user id in the token
+            console.log("auth token: ",token)
             if(!token.sub){
                 return token
             }
