@@ -30,7 +30,7 @@ export default withAuth(
 
     //protected routes lazem ykoun connected el wa7ed bech ynajem yod5lelhom
     if(!token && checkLink(pathName, pagetKanAuth)){
-        return NextResponse.redirect(new URL(HomePage, req.url))
+        return NextResponse.redirect(new URL("/uber", req.url))
     }
 
     if(token){
