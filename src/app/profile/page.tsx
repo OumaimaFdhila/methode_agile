@@ -1,5 +1,9 @@
+import  Calendar  from "@/components/calendar"
+
 export default function Profile(){
     return(
-        <div>hadha profile</div>
+        <div>
+            <Calendar/>
+        </div>
     )
 }

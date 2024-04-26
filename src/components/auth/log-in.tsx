@@ -6,11 +6,8 @@ import { EyeFilledIcon } from "./EyeFilledIcon"
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react"
 import { HiOutlineMail } from "react-icons/hi";
-import {useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
-import {auth} from '@/lib/firebase'
 import { useRouter } from "next/navigation"
-import { GoogleAuthProvider } from "firebase/auth"
-import { signInWithPopup } from "firebase/auth"
+import { signIn } from "next-auth/react"
 
 export default function App(props:{isSign:(sign:boolean)=>void }) {
 
@@ -19,36 +16,36 @@ export default function App(props:{isSign:(sign:boolean)=>void }) {
     const [email,setEmail] =useState('')
     const [password,setPassword]=useState('')
     const [isVisible, setIsVisible] = useState(false);
-    const [SignIn]=useSignInWithEmailAndPassword(auth)
   
     const toggleVisibility = () => setIsVisible(!isVisible);
   
-    const hundleLogIn= async ()=>{
-      try{
-          const res =await SignIn(email,password)
-          console.log({res})
-          sessionStorage.setItem('user','true')
-          setEmail('')
-          setPassword('')
-          Router.push('/profile')
-      }
-      catch(e){
-          console.error(e)
-      }
+    const hundleLogIn= (onClose:any)=>{
+      signIn("credentials", {email,password, redirect:false}).then((res)=>{
+        if(res?.error){
+            throw Error("invalid credentials")
+        }
+        if(res?.ok && !res.error){
+            Router.push("/profile")
+            onClose()
+        }
+    }).catch((error)=>{
+        console.log(error)
+        // toast({
+        //     description:<p className="text-red-500 text-md font-semibold">invalid credentials</p>,
+        //     variant:"destructive"
+        // })
+        // setIsInvalid(true)
   
+      })
     }
 
-    const HandleGoogle = async () => {
-      try {
-          const provider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, provider);
-          sessionStorage.setItem('user','true')
-          const user = result.user;
-          console.log(user);
-          Router.push('/profile');//hez lzl profile
-      } catch (error) {
-          console.error(error)
-      }
+    const HandleGoogle = (onClose:any) => {
+      signIn("google",{redirect:false}).then((res)=>{
+        if(res?.ok && !res.error){
+            Router.push("/profile")
+            onClose()
+        }
+    })
   };
 
 
@@ -61,7 +58,7 @@ export default function App(props:{isSign:(sign:boolean)=>void }) {
             <>
               <ModalHeader className="text-[#d3570d]   flex flex-col gap-1">Log In</ModalHeader>
               <ModalBody className="flex flex-col items-center">
-              <Button onClick={HandleGoogle} variant="bordered" color="default"  className="w-[80%] text-white flex justify-center items-center" startContent={<FcGoogle size={20} className="flex-shrink-0"/>} > 
+              <Button onClick={()=>HandleGoogle(onClose)} variant="bordered" color="default"  className="w-[80%] text-white flex justify-center items-center" startContent={<FcGoogle size={20} className="flex-shrink-0"/>} > 
                   Log In with Google
                 </Button>
                 <div className="w-[80%] flex justify-center items-center">
@@ -102,17 +99,17 @@ export default function App(props:{isSign:(sign:boolean)=>void }) {
 
                 <div className="flex py-2 px-1 justify-end">
                 
-                  <Link className="text-[#d3570d] text-sm " href="#" >
+                  <Link className="text-[#d3570d] text-sm border-b-1 border-[#d3570d]" href="#" >
                     Forgot password?
                   </Link>
                 </div>
               </ModalBody>
               <ModalFooter className="flex justify-between items-center">
                 {/*  onClick={() =>{ isSign(true)}} bech ki tenzel 3leha thezek lel sign*/}
-              <Link className="text-sm text-white" onClick={() =>{ isSign(true)}} href={""} >
+              <Link className="text-sm text-white border-b-1 border-white" onClick={() =>{ isSign(true)}} href={""} >
                     No account ? Sign Up
                 </Link>
-                <Button onClick={()=>{hundleLogIn();}}  className="bg-[#d3570d] text-white font-semibold flex justify-center" > 
+                <Button onClick={()=>{hundleLogIn(onClose);}} size="lg"  className="bg-[#d3570d] text-white font-semibold flex justify-center" > 
                   Log In
                 </Button>
               </ModalFooter>

@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
+import { userCred } from "@/types/dbModelsTypes";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,9 +27,9 @@ const auth=getAuth(app)
 
 export {DB , auth}
 
-export function AddUser(email:string,password:string,firstName:string,lastName:string,birthdate:string,country:string,language:string,role:string): Promise<string> {
+export function AddUser(email:string,password:string,firstName:string,lastName:string,birthdate:string,country:string,language:string,username:string): Promise<string> {
   return new Promise((resolve, reject) => {
-      axios.post('/api/addUser', { email,password,firstName,lastName,birthdate,country,language,role })
+      axios.post('/api/addUser', { email,password,firstName,lastName,birthdate,country,language,username })
           .then((res) => {
               console.log(res.data + " id");
               resolve(res.data as string);
@@ -38,4 +39,29 @@ export function AddUser(email:string,password:string,firstName:string,lastName:s
               reject("Save failed"); // Reject with an error message
           });
   });
+}
+
+export async function getUserByEmail(email:string){
+  try{
+    const colRef = collection(DB, "users");
+    const q1 = query(colRef,where("email","==",email),limit(1))
+    const userDocs = (await getDocs(q1)).docs.map((doc)=>{
+      return {...doc.data(), id:doc.id}
+    })
+    const user:userCred | null = userDocs.length === 1 ? userDocs[0] as userCred : null
+    return user
+  }catch{
+    return null
+  }
+}
+
+export async function getUserByID(ID:string){
+  try{
+    const docRef = doc(DB, "users",ID);
+    const docCol = await getDoc(docRef)
+    const user:userCred | null = docCol ? {...docCol.data(), id:docCol.id} as userCred : null
+    return user
+  }catch{
+    return null
+  }
 }

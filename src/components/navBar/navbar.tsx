@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link,  DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, Button, Autocomplete, AutocompleteItem} from "@nextui-org/react";
 // import { IoSearchSharp } from "react-icons/io5";
 // import { MdAccountCircle } from "react-icons/md";
@@ -11,32 +11,22 @@ import { usePathname } from "next/navigation";
 import Image from 'next/image'
 import Auth_button from "../auth/log_button";
 import Sign_up_button from "../auth/sign_up_button";
-import { signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase";
-import {useAuthState} from 'react-firebase-hooks/auth'
 import { useRouter } from "next/navigation"
+import { useSession,signOut } from "next-auth/react";
+import FinalSetUp from "../auth/finalSetUp";
 
 export default function Nav() {
-  const [user]=useAuthState(auth)
-  const [userSession, setUserSession] = useState<string | null>(null)
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = usePathname()
   const Router=useRouter()
+  const {data:session}=useSession()
 
-  useEffect(()=>{
-    setUserSession(sessionStorage.getItem('user'))
-  },[])
+  console.log(session?.user.image)
 
-  const menuItems = [
-    "Home",
-    "Über uns",
-    "Kontakt",
-    "Datenschutzerklärung"
-  ];
 
   return (
     <Navbar  onMenuOpenChange={setIsMenuOpen}
-    maxWidth="xl"
+    maxWidth="full"
     isBordered
     isBlurred={false}
     classNames={{
@@ -88,19 +78,19 @@ export default function Nav() {
             Kontakt
             </Link>
           </NavbarItem>
-          {user && userSession?
+          {session?
           <NavbarItem isActive={pathName.startsWith("/profile")}>
             <Link color="foreground" href="/profile">
             Profile 
             </Link>
           </NavbarItem>:
-          <NavbarItem isActive={pathName.startsWith("/profile")}>
+          <NavbarItem isActive={pathName.startsWith("/Datenschutzerklarung")}>
           <Link color="foreground" href="/Datenschutzerklarung">
           Datenschutzerklärung
           </Link>
         </NavbarItem>
           }
-          {user && userSession?
+          {session?
           <NavbarItem isActive={pathName.startsWith("/dashboard")}>
             <Link color="foreground" href="/dashboard">
             Dashboard 
@@ -109,7 +99,8 @@ export default function Nav() {
       </NavbarContent>
 
       <NavbarContent as="div" className="items-center" justify="end">
-        {!user && !userSession?
+      <FinalSetUp/>
+        {!session?
         <div>
         <Auth_button/>
         <Sign_up_button/>
@@ -123,20 +114,20 @@ export default function Nav() {
             color="default"
             // name={user.name as string}
             size="sm"
-            src={user?.photoURL as string}
+            src={session.user.image as string}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-semibold text-[#D3570D]">Signed in as</p>
-            <p className="font-semibold">{user?.email}</p>
+            <p className="font-semibold">{session.user.email}</p>
           </DropdownItem>
           {/* <DropdownItem key="Profile"><MdAccountCircle className="inline-block"/> Profile</DropdownItem> */}
           <DropdownItem href="/Datenschutzerklarung" key="Datenschutzerklärung"><MdOutlineSpaceDashboard className="inline-block"/> Datenschutzerklärung</DropdownItem>
           <DropdownItem key="Settings"><MdOutlineAdminPanelSettings className="inline-block"/> Settings</DropdownItem>
           {/* <DropdownItem key="language">
           </DropdownItem> */}
-          <DropdownItem key="logout" color="danger" onClick={()=>{signOut(auth);sessionStorage.removeItem('user');Router.push('/')}}>
+          <DropdownItem key="logout" color="danger" onClick={()=>{signOut();}}>
             <TbLogout className="inline-block"/> Log Out
           </DropdownItem>
         </DropdownMenu>
@@ -180,7 +171,7 @@ export default function Nav() {
               href="/Datenschutzerklarung"
               size="lg"
             >
-              Über uns
+              Datenschutzerklärung
             </Link>
           </NavbarMenuItem>
       </NavbarMenu>

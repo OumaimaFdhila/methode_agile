@@ -220,7 +220,7 @@ export default function Home() {
                   <div className="w-[120px] mb-3 shadow-xl aspect-square bg-white rounded-full flex justify-center items-center md:w-[150px]" data-aos="zoom-in" data-aos-duration="1500">
                   <FaComputer className="w-[40px] h-[50px] hover:animate-pulse md:w-[50px]" style={{color:"#d3570d"}} />
                   </div>
-                  <p className="font-bold text-[#222831] text-center  text-xl md:text-2xl" data-aos="fade-down" data-aos-anchor-placement="top-bottom" >Higt-tech</p>
+                  <p className="font-bold text-[#222831] text-center  text-xl md:text-2xl" data-aos="fade-down" data-aos-anchor-placement="top-bottom" >Moderne technologie</p>
                 </div>
 
                 <div className="flex flex-col justify-center items-center ">

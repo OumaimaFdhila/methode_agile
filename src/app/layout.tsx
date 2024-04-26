@@ -3,6 +3,7 @@ import "./globals.css";
 import {Providers} from './providers'
 import Nav from '@/components/navBar/navbar'
 import Footer from '@/components/footer'
+import AppSession from "@/contexts/AppSession";
 
 export const metadata: Metadata = {
   icons:"/dark_logo.png",
@@ -19,11 +20,13 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en" >
       <body className="w-full h-full">
       <Providers>
+      <AppSession>
           <main>
             <Nav/>
             {children}
             <Footer/>
           </main>
+      </AppSession>
       </Providers>
       </body>
     </html>

@@ -7,21 +7,16 @@ import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon"
 import { EyeFilledIcon } from "./EyeFilledIcon"
 import { useState } from "react"
 import { HiOutlineMail } from "react-icons/hi";
-import {useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
-import {auth} from '@/lib/firebase'
 import { useRouter } from "next/navigation"
 import {DatePicker} from "@nextui-org/date-picker";
-import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
 import { AddUser } from "@/lib/firebase";
 import {parseDate} from "@internationalized/date";
+import { signIn } from "next-auth/react";
 
-type admin = {email:string,password:string,id:string}
 
 export default function App(props:{isSign:(sign:boolean)=>void}) {
     const {isSign}=props
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isVisible, setIsVisible] = useState(false);
-    const [open,setOpen]=useState(true)
 
     const [email,setEmail] =useState('')
     const [password,setPassword]=useState('')
@@ -29,52 +24,40 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
     const [lastName,setLastName]=useState('')
     const [country,setCountry]=useState('')
     const [birthdate,setBirthDate]=useState(parseDate("2024-04-04"))
-    const [role,setRole]=useState("")
+    const [username,setUsername]=useState("")
     const [language,setLanguage]=useState("")
-    const [admins,setAdmins]=useState<admin[]>([])
 
-    const [createUser]=useCreateUserWithEmailAndPassword(auth)
-    const [SignIn]=useSignInWithEmailAndPassword(auth)
+
 
     const Router=useRouter()
 
     const date = new Date(birthdate.year, birthdate.month-1 , birthdate.day);//-1
 
 
-    const AddUserToBD= async ()=>{
-      const id=(await AddUser(email,password,firstName,lastName,date.toLocaleDateString(),country,language,role)) as string
-      if(role=="Admin"){
-        setAdmins([...admins,{email:email,password:password,id:id}])
-        console.log("new admin added")
-      }
-      console.log(admins)
-    }
+    const AddUserToBD= async (onClose:any)=>{
+      const id=(await AddUser(email,password,firstName,lastName,date.toLocaleDateString(),country,language,username)) as string
+      signIn("credentials", {email,password, redirect:false}).then((res)=>{
+        if(res?.error){
+            throw Error(res.error)
+        }
+        if(res?.ok && !res.error){
+            Router.push("/profile")
+            onClose()
+        }
+    }).catch((error)=>{
+        console.log(error)
+        // toast({
+        //     description:<p className="text-red-500 text-md font-semibold">invalid credentials</p>,
+        //     variant:"destructive"
+        // })
+        // setIsInvalid(true)
   
+      })
+    }
+
     const toggleVisibility = () => setIsVisible(!isVisible);
   
-    const hundleSignUp= async ()=>{
-      try{
-          const res = await createUser(email,password)
-          console.log({res})
-          sessionStorage.setItem('user','true')
-          const uid =res?.user.uid as string
-          try{
-            const res =await SignIn(email,password)
-            console.log({res})
-            sessionStorage.setItem('user','true')
-            setEmail('')
-            setPassword('')
-            Router.push('/profile')//hez lzl profile
-        }
-        catch(e){
-            console.error(e)
-        }
-      }
-      catch(e){
-          console.error(e)
-      }
-  
-    }
+   
     return (
         <div>
             
@@ -155,6 +138,18 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
                 />
                 </div>
                 <div className="w-[48%]">
+                <Input
+                  autoFocus
+                  className="text-white mb-3"
+                  endContent={
+                    < HiOutlineMail  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                  }
+                  label="Username"
+                  placeholder="Enter your Username"
+                  variant="bordered"
+                  value={username}
+                  onChange={(e)=>{setUsername(e.target.value)}}
+                />
                 <DatePicker label={"Birth date"} className="mb-3" variant="bordered" value={birthdate} onChange={setBirthDate}/>
                 
                 <Input
@@ -189,7 +184,7 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
                       </SelectItem>
                   </Select>
 
-                  <Select 
+                  {/* <Select 
                     label="Select Role" 
                     className="dark  text-white w-[100%] flex-shrink-0 mb-3" 
                     variant="bordered"
@@ -202,7 +197,7 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
                       <SelectItem key="User" value="User">
                         User
                       </SelectItem>
-                  </Select>
+                  </Select> */}
 
                   </div>
 
@@ -211,10 +206,10 @@ export default function App(props:{isSign:(sign:boolean)=>void}) {
               </ModalBody>
               <ModalFooter className="flex justify-between items-center">
                 {/*onClick={() =>{ isSign(false)}} bech ki tenzel 3leha thezek lel log  */}
-              <Link className="text-sm text-white" onClick={() =>{ isSign(false)}} href={""} >
+              <Link className="text-sm text-white border-b-1 border-white" onClick={() =>{ isSign(false)}} href={""} >
                     Already have account ? Log In
                 </Link>
-                <Button onClick={()=>{AddUserToBD();hundleSignUp();}} className="bg-[#d3570d] text-white font-semibold flex justify-center" > 
+                <Button onClick={()=>{AddUserToBD(onClose)}} size="lg" className="bg-[#d3570d] text-white font-semibold  flex justify-center" > 
                   Sign Up
                 </Button>
               </ModalFooter>
