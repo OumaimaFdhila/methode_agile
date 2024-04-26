@@ -18,7 +18,7 @@
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "firebase": "^10.11.0",
-    "firebase-admin": "11.4.1",
+    "firebase-admin": "^12.1.0",
     "framer-motion": "^11.1.7",
     "google-map-react": "^2.2.1",
     "moment": "^2.30.1",
