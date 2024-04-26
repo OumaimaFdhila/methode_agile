@@ -20,7 +20,10 @@ function checkLink(link:string, list:string[]){
 
 export default withAuth(
   async function middleware(req) {
-    const token = await getToken({ req });
+    const token = await getToken({
+      req,
+      secureCookie: true
+    })
     console.log("token : ",token)
     const pathName = req.nextUrl.pathname
     
