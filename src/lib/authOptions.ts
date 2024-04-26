@@ -61,6 +61,7 @@ export const authOptions:AuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks:{
         async session({session,token}){
+            console.log("session token: ",token)
             if(token.sub){
                 session.user.name = token.name
                 session.user.id = token.sub
@@ -77,7 +78,7 @@ export const authOptions:AuthOptions = {
             session.user.lastName = token.lastName as string | null
 
             session.user.verified = token.verified ? true : false
-
+            console.log("session: ",session)
             return session
         },
         async jwt({token}){
