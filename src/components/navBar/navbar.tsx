@@ -42,7 +42,7 @@ export default function Nav() {
         "data-[active=true]:after:right-0",
         "data-[active=true]:after:h-[2px]",
         "data-[active=true]:after:rounded-[2px]",
-        "data-[active=true]:after:bg-black",
+        "data-[active=true]:after:bg-black"
       ],
     }}
     >

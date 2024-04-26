@@ -30,7 +30,7 @@ export default function FinalSetUp() {
             console.log("bech n5admou popup")
             onOpen()
         }
-    },[session])
+    },[session,onOpen])
 
     const router = useRouter()
     const { update } = useSession()
