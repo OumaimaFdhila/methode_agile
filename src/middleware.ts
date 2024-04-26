@@ -52,8 +52,7 @@ export default withAuth(
 
       // //kan cv n5alihech y3awed yod5ol lel login page 5ater deja jaww bahi :)
       // if(pathName === authanticationPage){
-      //   return NextResponse.redirect(new URL("/", req.url))
-      // }
+      //   return NextResponse.redirect(new URL("/", req.url))}
     }
   },
   {
