@@ -1,12 +1,12 @@
 import {AuthOptions} from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import GithubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { cert } from "firebase-admin/app"
 import { getUserByEmail, getUserByID } from "@/lib/firebase"
 import bcrypt from "bcrypt";
+import { Timestamp } from "firebase-admin/firestore";
 
 export const authOptions:AuthOptions = {
     // @ts-ignore
@@ -67,7 +67,7 @@ export const authOptions:AuthOptions = {
                 session.user.id = token.sub
             }
 
-            if(token.role === "User" || token.role === "Admin"){
+            if(token.role === "user" || token.role === "admin"){
                 session.user.role =  token.role
             }
             else{
@@ -76,8 +76,13 @@ export const authOptions:AuthOptions = {
 
             session.user.firstName = token.firstName as string | null
             session.user.lastName = token.lastName as string | null
-
             session.user.verified = token.verified ? true : false
+            session.user.country= token.country as string | null
+            session.user.language=token.language as string | null
+            session.user.birthdate=token.birthdate as string | null
+            session.user.updaterdAt=token.updatedAt as Timestamp
+            session.user.createdAt=token.createdAt as Timestamp
+
             console.log("session: ",session)
             return session
         },
@@ -93,14 +98,13 @@ export const authOptions:AuthOptions = {
 
             if(user){
                 token.role = user.role
-                
                 token.firstName = user.firstName
                 token.lastName = user.lastName
-
-                token.name = user.name
-
-
+                token.email=user.email
+                token.language = user.language
                 token.verified = user.verified
+                token.birthdate=user.birthdate
+                token.country=user.country
             }
 
             return token

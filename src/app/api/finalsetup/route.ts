@@ -6,12 +6,13 @@ import { authOptions } from '@/lib/authOptions'
 import { getServerSession } from "next-auth/next"
 
 
+
 type reqData = {
     firstName:string|null, 
     lastName:string|null, 
     country:string|null,
     date1:string|null,
-    username:string|null,
+    password:string|null,
     language:string|null,
 }
 export async function POST(req:Request) {
@@ -22,9 +23,9 @@ export async function POST(req:Request) {
             return NextResponse.json("you are not logged in", {status:400})
         }
 
-        const {firstName,lastName,country,date1,username,language}: reqData = await req.json();
+        const {firstName,lastName,country,date1,password,language}: reqData = await req.json();
         //data check
-        if(!firstName || !lastName || !country||!username || !language){
+        if(!firstName || !lastName || !country||!password || !language){
             return NextResponse.json("Missing Data", {status:400})
         }
 
@@ -32,7 +33,7 @@ export async function POST(req:Request) {
         const docRef = doc(DB, "users", session.user.id)
         await updateDoc(docRef,{
             updaterdAt:serverTimestamp(),
-            firstName:firstName,lastName:lastName,country:country,birthdate:date1,username:username,language:language,role:"user"
+            firstName:firstName,lastName:lastName,country:country,birthdate:date1,password:password,language:language,role:"user",
         })
 
         return NextResponse.json("mrigla!")

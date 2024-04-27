@@ -9,6 +9,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 
+
 export default function App(props:{isSign:(sign:boolean)=>void }) {
 
     const{isSign}=props
@@ -18,7 +19,7 @@ export default function App(props:{isSign:(sign:boolean)=>void }) {
     const [isVisible, setIsVisible] = useState(false);
   
     const toggleVisibility = () => setIsVisible(!isVisible);
-  
+    
     const hundleLogIn= (onClose:any)=>{
       signIn("credentials", {email,password, redirect:false}).then((res)=>{
         if(res?.error){

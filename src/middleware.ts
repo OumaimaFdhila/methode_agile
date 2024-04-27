@@ -22,7 +22,8 @@ export default withAuth(
   async function middleware(req) {
     const token = await getToken({
       req,
-      secureCookie: true
+      secret: process.env.NEXTAUTH_SECRET,
+      // secureCookie: true
     })
     console.log("token : ",token)
     const pathName = req.nextUrl.pathname
@@ -33,7 +34,7 @@ export default withAuth(
 
     //protected routes lazem ykoun connected el wa7ed bech ynajem yod5lelhom
     if(!token && checkLink(pathName, pagetKanAuth)){
-        return NextResponse.redirect(new URL("/uber", req.url))
+        return NextResponse.redirect(new URL("/", req.url))
     }
 
     if(token){

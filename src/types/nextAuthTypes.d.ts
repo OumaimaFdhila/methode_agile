@@ -5,9 +5,14 @@ declare module "next-auth" {
     user: {
       id: string
       verified:boolean
-      role: null | "Admin" | "User"
+      role: null | "admin" | "user"
       firstName: string | null
       lastName: string | null
+      createdAt: Timestamp,
+      updaterdAt: Timestamp,
+      language:string|null,
+      birthdate:string|null,
+      country:string|null,
     } & DefaultSession["user"]
   }
 }

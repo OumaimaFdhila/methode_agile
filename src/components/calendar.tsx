@@ -9,7 +9,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 export default function MyCalendar(){
     const localizer = momentLocalizer(moment);
     return(
-        <div>
+        <div className='w-[600px]  '>
             <Calendar
             localizer={localizer}
             events={[

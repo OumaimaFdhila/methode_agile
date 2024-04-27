@@ -12,17 +12,16 @@ import Image from 'next/image'
 import Auth_button from "../auth/log_button";
 import Sign_up_button from "../auth/sign_up_button";
 import { useRouter } from "next/navigation"
-import { useSession,signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import FinalSetUp from "../auth/finalSetUp";
+import { Session } from "next-auth";
 
-export default function Nav() {
+export default function Nav({session}:{session : Session | null}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = usePathname()
   const Router=useRouter()
-  const {data:session}=useSession()
 
-  console.log(session?.user.image)
-
+  console.log(session?.user.language)
 
   return (
     <Navbar  onMenuOpenChange={setIsMenuOpen}
@@ -62,7 +61,7 @@ export default function Nav() {
       </NavbarBrand>
     </NavbarContent>
         
-        <NavbarContent className="hidden sm:flex gap-3">
+        <NavbarContent className="hidden sm:flex sm:ml-20">
         <NavbarItem isActive={pathName==="/"}>
             <Link href="/" aria-current="page" color="foreground" >
               Home
@@ -90,7 +89,7 @@ export default function Nav() {
           </Link>
         </NavbarItem>
           }
-          {session?
+          {session  && session?.user.role==="admin" ?
           <NavbarItem isActive={pathName.startsWith("/dashboard")}>
             <Link color="foreground" href="/dashboard">
             Dashboard 

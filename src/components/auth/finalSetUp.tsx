@@ -8,6 +8,8 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { MdPlace } from "react-icons/md";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { EyeFilledIcon } from "./EyeFilledIcon";
+import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 
 export default function FinalSetUp() {
 
@@ -19,8 +21,9 @@ export default function FinalSetUp() {
     const [lastName,setLastName]=useState('')
     const [country,setCountry]=useState('')
     const [birthdate,setBirthDate]=useState(parseDate("2024-04-04"))
-    const [username,setUsername]=useState("")
+    const [password,setPassword]=useState("")
     const [language,setLanguage]=useState("")
+    const [isVisible, setIsVisible] = useState(false);
 
     const date = new Date(birthdate.year, birthdate.month-1 , birthdate.day);//-1
     const date1 = date.toLocaleDateString()
@@ -38,7 +41,7 @@ export default function FinalSetUp() {
     const submit = async ()=>{
         // e.preventDefault()
         // setIsDisabled(true)
-        axios.post('/api/finalsetup',{firstName,lastName,country,date1,username,language})
+        axios.post('/api/finalsetup',{firstName,lastName,country,date1,password,language})
         .then(async ()=>{
             await update().then(()=>{
                 router.push("/profile")
@@ -54,7 +57,7 @@ export default function FinalSetUp() {
         })
     }
   
-
+    const toggleVisibility = () => setIsVisible(!isVisible);
 
 
   return (
@@ -121,16 +124,22 @@ export default function FinalSetUp() {
                   value={lastName}
                 />
                 <Input
-                  autoFocus
-                  className="text-white mb-3"
-                  endContent={
-                    < HiOutlineMail  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                  }
-                  label="Username"
-                  placeholder="Enter your Username"
-                  variant="bordered"
-                  value={username}
-                  onChange={(e)=>{setUsername(e.target.value)}}
+                label="Password"
+                variant="bordered"
+                placeholder="Enter your password"
+                className="text-2xl  text-white flex-shrink-0 mb-3"
+                value={password}
+                onChange={(e)=>{setPassword(e.target.value)}}
+                endContent={
+                    <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                    {isVisible ? (
+                        <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    ) : (
+                        < EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                    )}
+                    </button>
+                }
+                type={isVisible ? "text" : "password"}
                 />
                 </div>
                 <div className="w-[48%]">

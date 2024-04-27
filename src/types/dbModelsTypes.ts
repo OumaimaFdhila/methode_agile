@@ -2,7 +2,6 @@ import { Timestamp } from "firebase/firestore"
 
 export type userCred = {
     id: string,
-    name:string,
     email: string,
     createdAt: Timestamp,
     updaterdAt: Timestamp,
@@ -13,5 +12,8 @@ export type userCred = {
     image?: string | null,
     password:string|null;
     role?:"Admin" | "User" | null,
+    language:string|null,
+    birthdate:string|null,
+    country:string|null,
 }
 
