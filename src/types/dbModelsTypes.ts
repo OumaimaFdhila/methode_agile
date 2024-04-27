@@ -4,7 +4,7 @@ export type userCred = {
     id: string,
     email: string,
     createdAt: Timestamp,
-    updaterdAt: Timestamp,
+    updatedAt: Timestamp,
     verified:boolean
     firstName?: string | null,
     lastName?: string | null,

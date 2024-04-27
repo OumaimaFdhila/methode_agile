@@ -9,7 +9,7 @@ declare module "next-auth" {
       firstName: string | null
       lastName: string | null
       createdAt: Timestamp,
-      updaterdAt: Timestamp,
+      updatedAt: Timestamp,
       language:string|null,
       birthdate:string|null,
       country:string|null,

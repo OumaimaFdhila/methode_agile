@@ -32,8 +32,7 @@ export async function POST(req:Request) {
         //update user data in db
         const docRef = doc(DB, "users", session.user.id)
         await updateDoc(docRef,{
-            updaterdAt:serverTimestamp(),
-            firstName:firstName,lastName:lastName,country:country,birthdate:date1,password:password,language:language,role:"user",
+            firstName:firstName,lastName:lastName,country:country,birthdate:date1,password:password,language:language,role:"user",updatedAt:serverTimestamp(),
         })
 
         return NextResponse.json("mrigla!")

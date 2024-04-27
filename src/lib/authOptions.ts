@@ -80,7 +80,7 @@ export const authOptions:AuthOptions = {
             session.user.country= token.country as string | null
             session.user.language=token.language as string | null
             session.user.birthdate=token.birthdate as string | null
-            session.user.updaterdAt=token.updatedAt as Timestamp
+            session.user.updatedAt=token.updatedAt as Timestamp
             session.user.createdAt=token.createdAt as Timestamp
 
             console.log("session: ",session)
@@ -105,6 +105,9 @@ export const authOptions:AuthOptions = {
                 token.verified = user.verified
                 token.birthdate=user.birthdate
                 token.country=user.country
+                token.password=user.password
+                token.updatedAt=user.updatedAt
+                token.createdAt=user.createdAt
             }
 
             return token
