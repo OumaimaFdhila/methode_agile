@@ -2,6 +2,7 @@ import  Calendar  from "@/components/calendar"
 import CommentsComponent from "@/components/comments/commentsComponent"
 import SendMailButton from "@/components/mailsComponents/SendMailButton"
 import MailTable from "@/components/mailsComponents/mailTable"
+import UserTable from "@/components/usersTable"
 
 export default function Profile(){
 
@@ -16,8 +17,9 @@ export default function Profile(){
 
                 </div>
                 <div className="w-full h-[50%] bg-white border-1 border-[#dedede] rounded-xl ">
-                    <SendMailButton/>
-                    <MailTable/>
+                    {/* <SendMailButton/>
+                    <MailTable/> */}
+                    <UserTable/>
                 </div>
             </div>
 
