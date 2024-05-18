@@ -17,3 +17,39 @@ export type userCred = {
     country:string|null,
 }
 
+export type comment = {
+    id: string;
+    content: string;
+    userId:string;
+    user:{
+        name:string,
+        image?:string | null
+    }
+    parentComment: string | null;
+    ReplyTo?:string;
+    date?:Timestamp;
+};
+
+export type reaction = {
+    id: string;
+    reactionType: "like" | "dislike";
+    userId: string;
+    commentId:string;
+    date?:Timestamp;
+}
+
+export type mail = {
+    id:string,
+    sender:{
+        id:string,
+        email:string,
+        image?:string | null,
+        role:"admin" | "teacher" | "student"
+    },
+    sendTo:string, 
+    subject:string, 
+    description:string,
+    viewed:boolean,
+    reply?:string,
+    date:Timestamp,
+}
