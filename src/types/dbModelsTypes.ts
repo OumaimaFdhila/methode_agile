@@ -16,6 +16,7 @@ export type userCred = {
     birthdate:string|null,
     country:string|null,
 }
+
 export type comment = {
     id: string;
     content: string;
@@ -36,17 +37,19 @@ export type reaction = {
     commentId:string;
     date?:Timestamp;
 }
+
 export type mail = {
     id:string,
     sender:{
         id:string,
         email:string,
         image?:string | null,
-        role:"Admin" | "User"
+        role:"admin" | "teacher" | "student"
     },
     sendTo:string, 
     subject:string, 
     description:string,
     viewed:boolean,
+    reply?:string,
     date:Timestamp,
 }

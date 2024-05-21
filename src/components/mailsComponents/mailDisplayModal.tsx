@@ -2,17 +2,32 @@
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { mail } from "@/types/dbModelsTypes";
 import MailSendModal from "./mailSendModal";
+import axios from "axios";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { LuMailSearch } from "react-icons/lu";
 
 export default function MailDisplayModal(
     { isOpen, onOpenChange, mail }:
     { isOpen:boolean, onOpenChange:()=>void, mail:mail }) {
     const {isOpen:RisOpen, onOpen:RonOpen, onOpenChange:RonOpenChange} = useDisclosure();
+    const pathName = usePathname()
+
+    useEffect(()=>{
+      if(mail && !mail.viewed){
+        let url = "api/mails"
+        console.log(url)
+        axios.put(url,{id:mail.id})
+        .then((res)=>{
+        
+        })
+      }
+    }, [mail, pathName])
 
     return (
         <>
         {   mail?.sender.email ? 
-            <MailSendModal onOpenChange={RonOpenChange} isOpen={RisOpen} reply={mail.sender.email} />:
+            <MailSendModal onOpenChange={RonOpenChange} isOpen={RisOpen} reply={mail} />:
             null
         }
         <Modal 

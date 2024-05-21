@@ -2,6 +2,7 @@
 import { Textarea, Button, } from "@nextui-org/react";
 import axios from "axios";
 import { useState } from "react";
+
 import { comment } from "@/types/dbModelsTypes"
 import { useSession } from "next-auth/react";
 import { useCommentsUpdate } from "./commentsProvider";
@@ -20,7 +21,7 @@ export default function AddCommentArea({IsReply = false, ReplyTo="", parentComme
             ReplyTo
         }
         
-        axios.post("/api/comments/add", data).then((res)=>{
+        axios.post("api/comments/add", data).then((res)=>{
             let newComment = {
                 id:res.data,
                 content:content,

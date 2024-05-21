@@ -1,9 +1,8 @@
 "use client"
 import { comment, reaction } from "@/types/dbModelsTypes"
 import { createContext, useState, useContext, useEffect} from "react"
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, query, where} from "firebase/firestore"
 import { DB } from "@/lib/firebase"
-
 
 const CommentsContext = createContext<comment[]>([])
 const CommentsUpdateContext = createContext<(comment:comment)=>void>(()=>{})
@@ -34,7 +33,6 @@ export function useRemoveReaction(){
 export function CommentProvider({children}:{children:React.ReactNode}){
     const [comments, setComments] = useState<comment[]>([])
     const [reactions, setReactions] = useState<reaction[]>([])
-
     
     // [TODO] - sort by date, sort by likes
     useEffect(()=>{

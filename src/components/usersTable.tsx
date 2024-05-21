@@ -1,15 +1,14 @@
 "use client"
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Input, Button, Pagination, SortDescriptor, Dropdown, DropdownTrigger, DropdownMenu, Selection, DropdownItem, User, useDisclosure, Spinner, Chip} from "@nextui-org/react";
-import type { mail } from "@/types/dbModelsTypes"
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Input, Button, Pagination, SortDescriptor, Dropdown, DropdownTrigger, DropdownMenu, Selection, DropdownItem, User, useDisclosure, Spinner} from "@nextui-org/react";
+import type { mail, userCred } from "@/types/dbModelsTypes"
 import { useState, useMemo, useCallback, useEffect } from "react";
 
 import axios from "axios";
 
-import { IoSearchOutline } from "react-icons/io5";
+import { IoMailSharp, IoSearchOutline } from "react-icons/io5";
 import { FaAngleDown } from "react-icons/fa";
-import MailDisplayModal from "./mailDisplayModal";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import MailSendModal from "@/components/mailsComponents/mailSendModal";
 
 function getDate(timestamp:any){
   try{
@@ -32,77 +31,67 @@ function getDate(timestamp:any){
   }
 }
 
-export default function MailTable(){
-    const [mails, setMails] = useState<mail[] | null>(null)
+export default function UserTable(){
+    const [users, setUsers] = useState<userCred[] | null>(null)
     const pathName = usePathname()
-    const {data:session} = useSession()
 
     useEffect(()=>{
-      let url = "/api/mails"
-      if(pathName.includes("/dashboard")){
-        url = "../api/mails"
-      }
+      let url = "/api/user"
       axios.get(url)
       .then((res)=>{
         if(res.data.length){
-          setMails(res.data)
+          setUsers(res.data)
         }
         else{
-          setMails([])
+          setUsers([])
         }
       }).catch(()=>{
-        setMails([])
+        setUsers([])
       })
     },[pathName])
 
     const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({column: '$.3',direction:"descending"});
 
-    const [viewedFilter, setViewedFilter] = useState<Selection>("all");
+    //const [viewedFilter, setViewedFilter] = useState<Selection>("all");
     const [roleFilter, setRoleFilter] = useState<Selection>("all");
-    const [SRFilter, setSRFilter] = useState<Selection>("all");
 
-    const [rowsPerPage, setRowsPerPage] = useState(7);
+    const [rowsPerPage, setRowsPerPage] = useState(30);
     const [filterValue, setFilterValue] = useState("");
     const [page, setPage] = useState(1);
     
     const hasSearchFilter = Boolean(filterValue);
 
     const filteredItems = useMemo(() => {
-        if(!mails || !mails.length) return mails
-        let filteredMails = [...mails];
+        if(!users || !users.length) return users
+        let filteredUsers = [...users];
     
         if (hasSearchFilter) {
-          filteredMails = filteredMails.filter((mail) =>
-            mail.sender.email.toLowerCase().includes(filterValue.toLowerCase()),
+            filteredUsers = filteredUsers.filter((user) =>
+                user.email.toLowerCase().includes(filterValue.toLowerCase()),
           );
         }
-        if (viewedFilter !== "all") {
-            filteredMails = filteredMails.filter((mail) =>
-            Array.from(viewedFilter).includes((mail.viewed ? "seen" : "unseen")),
-          );
-        }
+        // if (viewedFilter !== "all") {
+        //     filteredUsers = filteredUsers.filter((mail) =>
+        //     Array.from(viewedFilter).includes((mail.viewed ? "seen" : "unseen")),
+        //   );
+        // }
 
         if (roleFilter !== "all") {
-          filteredMails = filteredMails.filter((mail) =>
-            Array.from(roleFilter).includes((mail.sender.role)),
+            filteredUsers = filteredUsers.filter((user) =>
+            Array.from(roleFilter).includes((user.role!)),
           );
         }
-
-        if (SRFilter !== "all") {
-          filteredMails = filteredMails.filter((mail) =>
-            Array.from(SRFilter).includes((mail.sendTo === session?.user.email ? "resived" : "sent")),
-          );
-        }
-        return filteredMails;
-    }, [SRFilter, filterValue, hasSearchFilter, mails, roleFilter, session, viewedFilter]);
+        return filteredUsers;
+    }, [filterValue, hasSearchFilter, roleFilter, users]);
 
     const pages = filteredItems ? Math.ceil(filteredItems.length / rowsPerPage) : 0;
 
     const sortedItems = useMemo(() => {
-        if(!sortDescriptor.direction || !filteredItems?.length) return filteredItems
+        if(!sortDescriptor.direction || !filteredItems?.length ) return filteredItems
         return [...filteredItems].sort((a, b) => {
-            const first = a.date.seconds * 1000 + a.date.nanoseconds / 1000000
-            const second = b.date.seconds * 1000 + b.date.nanoseconds / 1000000
+            if(!a.createdAt || !b.createdAt) return 0
+            const first = a.createdAt.seconds * 1000 + a.createdAt.nanoseconds / 1000000
+            const second = b.createdAt.seconds * 1000 + b.createdAt.nanoseconds / 1000000
             const cmp = first < second ? -1 : first > second ? 1 : 0;
         
             return sortDescriptor.direction === "descending" ? -cmp : cmp;
@@ -151,7 +140,7 @@ export default function MailTable(){
                 onValueChange={onSearchChange}
               />
               <div className="flex gap-3">
-                <Dropdown>
+                {/* <Dropdown>
                   <DropdownTrigger className="hidden sm:flex">
                     <Button endContent={<FaAngleDown className="text-small" />} variant="flat">
                       status
@@ -172,7 +161,7 @@ export default function MailTable(){
                         unseen
                     </DropdownItem>
                   </DropdownMenu>
-                </Dropdown>
+                </Dropdown> */}
                 <Dropdown>
                   <DropdownTrigger className="hidden sm:flex">
                     <Button endContent={<FaAngleDown className="text-small" />} variant="flat">
@@ -198,32 +187,10 @@ export default function MailTable(){
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
-                <Dropdown>
-                  <DropdownTrigger className="hidden sm:flex">
-                    <Button endContent={<FaAngleDown className="text-small" />} variant="flat">
-                      sent/resived
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu
-                    disallowEmptySelection
-                    aria-label="Table Sections"
-                    closeOnSelect={false}
-                    selectedKeys={SRFilter}
-                    selectionMode="multiple"
-                    onSelectionChange={setSRFilter}
-                  >
-                    <DropdownItem key={"sent"} className="capitalize">
-                        sent
-                    </DropdownItem>
-                    <DropdownItem key={"resived"} className="capitalize">
-                        resived
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
               </div>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-default-400 text-small">Total {filteredItems ? filteredItems.length : 0} mails</span>
+              <span className="text-default-400 text-small">Total {filteredItems ? filteredItems.length : 0} users</span>
               <label className="flex items-center text-default-400 text-small">
                 Rows per page:
                 <select
@@ -231,7 +198,8 @@ export default function MailTable(){
                   value={rowsPerPage}
                   onChange={onRowsPerPageChange}
                 >
-                  <option value="7">7</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
                   <option value="15">15</option>
                   <option value="20">20</option>
                   <option value="30">30</option>
@@ -240,14 +208,14 @@ export default function MailTable(){
             </div>
           </div>
         );
-    }, [filterValue, onSearchChange, viewedFilter, roleFilter, SRFilter, filteredItems, rowsPerPage, onRowsPerPageChange, onClear]);
+    }, [filterValue, filteredItems, onClear, onRowsPerPageChange, onSearchChange, roleFilter, rowsPerPage]);
     
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [displayedMail, setDisplayedMail] = useState<mail | null>(null)
+    const [selectedUser, setSelectedUser] = useState<userCred | null>(null)
 
     return(
         <>
-        <MailDisplayModal mail={displayedMail!} onOpenChange={onOpenChange} isOpen={isOpen}/>
+        {selectedUser ? <MailSendModal onOpenChange={onOpenChange} isOpen={isOpen} email={selectedUser.email} /> : null}
         <Table 
             aria-label="Example empty table" 
             className="w-full h-[90%]  flex flex-wrap "
@@ -272,47 +240,42 @@ export default function MailTable(){
               }
         >
             <TableHeader>
-                <TableColumn>sender email</TableColumn>
+                <TableColumn>user</TableColumn>
                 <TableColumn>role</TableColumn>
-                <TableColumn>status</TableColumn>
-                <TableColumn>S/R</TableColumn>
-                <TableColumn allowsSorting>date</TableColumn>
+                <TableColumn allowsSorting>createdAt</TableColumn>
+                <TableColumn>actions</TableColumn>
             </TableHeader>
-            <TableBody emptyContent={mails !== null ? "No mails to display." :  <Spinner />}>
+            <TableBody emptyContent={users !== null ? "No user to display." :  <Spinner />}>
                 {!items ? []:
-                    items.map((mail)=>(
-                        <TableRow key={mail.id} onClick={()=>{
-                          if(mails){
-                            setMails(mails.map((m)=>{
-                              if(m.id === mail.id){
-                                return {...m, viewed:true}
-                              }
-                              return m
-                            }))
-                          }
-                          setDisplayedMail(mail)
-                          onOpen()
-                        }}>
+                    items.map((user)=>(
+                        <TableRow key={user.id}>
                             <TableCell>
                               <User   
-                                  name={mail.sender.email}
-                                  description={`subject ${mail.subject}`}
+                                  name={user.firstName + " " + user.lastName}
+                                  description={user.email}
                                   avatarProps={{
-                                    src: mail.sender.image ? mail.sender.image : undefined
+                                    src: user.image ? user.image : undefined
                                   }}
                                 />
                             </TableCell>
-                            <TableCell>{mail.sender.role}</TableCell>
-                            <TableCell>{mail.viewed ? 
-                              <Chip color="success" variant="light">
-                                <span className="font-semibold">seen</span>
-                              </Chip> : 
-                              <Chip color="warning" variant="light">
-                                <span className="font-semibold">unseen</span>
-                              </Chip>}
+                            <TableCell>{user.role}</TableCell>
+                            <TableCell>{getDate(user.updatedAt)}</TableCell>
+                            <TableCell>
+                                <div className="translate-x-[-10%]">
+                                <Button
+                                    variant="light"
+                                    color="warning"
+                                    size="md"
+                                    className="text-md font-bold"
+                                    onPress={()=>{
+                                        setSelectedUser(user)
+                                        onOpen()
+                                    }}>
+                                    <IoMailSharp/>
+                                    Send Mail
+                                </Button>
+                                </div>
                             </TableCell>
-                            <TableCell>{(mail.sendTo === session?.user.email ? "resived" : "sent")}</TableCell>
-                            <TableCell>{getDate(mail.date)}</TableCell>
                         </TableRow>
                     ))
                 }

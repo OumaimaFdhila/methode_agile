@@ -2,15 +2,19 @@
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Textarea } from "@nextui-org/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { IoMailSharp } from "react-icons/io5";
+
+//import { useToast } from "@/components/ui/use-toast"
 import { usePathname, useSearchParams } from "next/navigation";
+
+import { mail } from "@/types/dbModelsTypes";
 import { TbMailUp } from "react-icons/tb";
 import { LuMail } from "react-icons/lu";
 
 export default function MailSendModal(
-    { isOpen, onOpenChange, reply }:
-    { isOpen:boolean, onOpenChange:()=>void, reply?:string }) {
-    const teacherEmail = useRef(reply)
+    { isOpen, onOpenChange, reply, email }:
+    { isOpen:boolean, onOpenChange:()=>void, reply?:mail, email?:string }) {
+    //const { toast } = useToast()
+    const sendToEmail = useRef(reply?.sender.email)
     const [isDisabled, setIsDisabled] = useState(false)
     const [isInvalid, setIsInvalid] = useState("")
 
@@ -19,14 +23,17 @@ export default function MailSendModal(
     const [description, setDescription] = useState("")
 
     useEffect(()=>{
-        teacherEmail.current = reply
-    },[reply])
+        sendToEmail.current = reply?.sender.email
+        if(email){
+            sendToEmail.current = email
+        }
+    },[reply, email])
 
     const pathName = usePathname()
     const params = useSearchParams()
     useEffect(()=>{
-        if(teacherEmail.current !== undefined && teacherEmail.current !== "" && teacherEmail.current !== null){
-            setSendTo(teacherEmail.current)
+        if(sendToEmail.current !== undefined && sendToEmail.current !== "" && sendToEmail.current !== null){
+            setSendTo(sendToEmail.current)
         }
     },[params, isOpen])
 
@@ -42,7 +49,7 @@ export default function MailSendModal(
         if(pathName.includes("dashboard")){
             url = "../api/mails"
         }
-        axios.post(url, {sendTo, subject, description})
+        axios.post(url, {sendTo, subject, description, reply:reply? reply.id : null})
         .then((res)=>{
             console.log(res.data)
             // toast({

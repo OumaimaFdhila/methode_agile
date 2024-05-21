@@ -100,13 +100,13 @@ function CommentComp({image, name, content, date, id, ReplyTo, parentId}:{image?
                         <p>{ReplyTo ? <span className="text-danger font-semibold">@{`${ReplyTo} `}</span>:null}{`${content}`}</p>
                     </div>
                 </div>
-                {/* <Button
+                <Button
                     radius="full"
                     isIconOnly
                     variant="light"
                     size="sm">
                         <PiDotsThreeOutlineVerticalFill/>
-                </Button> */}
+                </Button>
             </div>
             <div className="flex gap-2 items-center pl-8">
                 <div className="flex items-center">

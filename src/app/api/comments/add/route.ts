@@ -20,9 +20,9 @@ export async function POST(req:Request) {
             userId: session.user.id,
             user:{
                 name:session.user.name,
-                image:session.user.image
+                image:session.user.image === undefined ? null : session.user.image
             },
-            parentComment,
+            parentComment:parentComment? parentComment : null,
             ReplyTo:ReplyTo? ReplyTo : "",
             date: serverTimestamp(),
         });
