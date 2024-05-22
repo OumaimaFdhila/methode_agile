@@ -7,6 +7,7 @@ import AppSession from "@/contexts/AppSession";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { TimerProvider } from "@/components/timer/timerProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
   icons:"/dark_logo.png",
