@@ -23,7 +23,7 @@ export default withAuth(
     const token = await getToken({
       req,
       secret: process.env.NEXTAUTH_SECRET,
-      // secureCookie: true
+      secureCookie: true
     })
     const pathName = req.nextUrl.pathname
     
