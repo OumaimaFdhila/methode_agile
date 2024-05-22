@@ -138,7 +138,7 @@ export default function MailTable(){
     const topContent = useMemo(() => {
         return (
         
-          <div className="flex flex-col gap-4">
+          <div className=" flex flex-col gap-4">
             <div className="flex justify-between gap-3 items-end">
               <Input
                 isClearable
@@ -250,7 +250,7 @@ export default function MailTable(){
         <MailDisplayModal mail={displayedMail!} onOpenChange={onOpenChange} isOpen={isOpen}/>
         <Table 
             aria-label="Example empty table" 
-            className="w-full h-[90%]  flex flex-wrap "
+            className="w-full h-full  flex flex-wrap "
             color="default"
             selectionMode="single"
             sortDescriptor={sortDescriptor}

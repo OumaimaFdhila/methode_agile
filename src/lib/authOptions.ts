@@ -30,8 +30,6 @@ export const authOptions:AuthOptions = {
                 }
 
                 const user = await getUserByEmail(credentials.email)
-
-                console.log(user)
                 
                 if(!user || !user.password){
                     throw new Error("invalid credentials")
@@ -61,7 +59,7 @@ export const authOptions:AuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks:{
         async session({session,token}){
-            console.log("session token: ",token)
+
             if(token.sub){
                 session.user.name = token.name
                 session.user.id = token.sub
@@ -82,22 +80,24 @@ export const authOptions:AuthOptions = {
             session.user.birthdate=token.birthdate as string | null
             session.user.updatedAt=token.updatedAt as Timestamp
             session.user.createdAt=token.createdAt as Timestamp
+            session.user.id=token.id as string
 
-            console.log("session: ",session)
+
             return session
         },
         async jwt({token}){
             //check for user id in the token
-            console.log("auth token: ",token)
+
             if(!token.sub){
                 return token
             }
 
             const user = await getUserByID(token.sub)
-            console.log("user: ",user)
+
 
             if(user){
                 token.role = user.role
+                token.id=user.id
                 token.firstName = user.firstName
                 token.lastName = user.lastName
                 token.email=user.email

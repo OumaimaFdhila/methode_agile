@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
-import { addTodo } from "@/app/api/toDoList";
+import { addTodo } from "@/app/api/toDoList/route";
 const AddTodo = () => {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -28,7 +28,7 @@ const AddTodo = () => {
       title,
       description,
       status,
-      userId: session.user.id,
+      userId: session?.user.id,
     };
     await addTodo(todo);
     setIsLoading(false);

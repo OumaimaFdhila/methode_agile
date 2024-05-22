@@ -25,7 +25,6 @@ export default withAuth(
       secret: process.env.NEXTAUTH_SECRET,
       // secureCookie: true
     })
-    console.log("token : ",token)
     const pathName = req.nextUrl.pathname
     
     if(pathName.startsWith("/api")){

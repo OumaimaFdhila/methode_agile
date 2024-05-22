@@ -10,18 +10,19 @@ import {
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { BD } from "../firebase";
+import { DB } from "@/lib/firebase";
 import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-import { deleteTodo, toggleTodoStatus } from "../api/todo";
+import { deleteTodo, toggleTodoStatus } from "@/app/api/toDoList/route";
 const TodoList = () => {
   const [todos, setTodos] = React.useState([]);
   const {data:session}=useSession()
-
+  console.log(session.user.id)
 
   const toast = useToast();
   const refreshData = () => {
 
-    const q = query(collection(BD, "todo"), where("user", "==", session.user.id));
+    const q = query(collection(DB, "todo"), where("user", "==", session.user.id));
+
 
     onSnapshot(q, (querySnapchot) => {
       let ar = [];
@@ -34,7 +35,7 @@ const TodoList = () => {
 
   useEffect(() => {
     refreshData();
-  }, [user]);
+  }, []);
 
   const handleTodoDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this todo?")) {
@@ -47,7 +48,7 @@ const TodoList = () => {
     const newStatus = status == "completed" ? "pending" : "completed";
     await toggleTodoStatus({ docId: id, status: newStatus });
     toast({
-      title: `Todo marked ${newStatus}`,
+      title: ```Todo marked ${newStatus}```,
       status: newStatus == "completed" ? "success" : "warning",
     });
   };

@@ -6,6 +6,7 @@ import Footer from '@/components/footer'
 import AppSession from "@/contexts/AppSession";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
   icons:"/dark_logo.png",
@@ -25,7 +26,9 @@ export default async function RootLayout({
       <AppSession>
           <main>
             <Nav session={await getServerSession(authOptions)}/>
+            <ChakraProvider cssVarsRoot="body">
             {children}
+            </ChakraProvider>
             <Footer/>
           </main>
       </AppSession>

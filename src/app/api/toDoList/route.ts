@@ -7,7 +7,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-const addTodo = async ({ title, description, status,userId }) => {
+export const addTodo = async ({ title, description, status,userId }:{ title:string, description:string, status:string,userId:string | undefined }) => {
   try {
     await addDoc(collection(DB, "todo"), {
       user: userId,
@@ -19,7 +19,7 @@ const addTodo = async ({ title, description, status,userId }) => {
   } catch (err) {}
 };
 
-const toggleTodoStatus = async ({ docId, status }) => {
+const toggleTodoStatus = async ({ docId, status }:{ docId:string, status:string }) => {
   try {
     const todoRef = doc(DB, "todo", docId);
     await updateDoc(todoRef, {
@@ -30,7 +30,7 @@ const toggleTodoStatus = async ({ docId, status }) => {
   }
 };
 
-const deleteTodo = async (docId) => {
+const deleteTodo = async (docId:string) => {
   try {
     const todoRef = doc(DB, "todo", docId);
     await deleteDoc(todoRef);
@@ -38,5 +38,3 @@ const deleteTodo = async (docId) => {
     console.log(err);
   }
 };
-
-export { addTodo, toggleTodoStatus, deleteTodo };

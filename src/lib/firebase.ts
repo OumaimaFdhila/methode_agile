@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { collection, doc, getDoc, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
 import { userCred } from "@/types/dbModelsTypes";
@@ -65,3 +65,5 @@ export async function getUserByID(ID:string){
     return null
   }
 }
+
+// src/lib/firebase.ts
