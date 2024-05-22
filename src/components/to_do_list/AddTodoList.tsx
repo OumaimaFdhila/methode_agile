@@ -10,32 +10,32 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
-import { addTodo } from "@/app/api/toDoList/route";
+import { addTodo } from "@/server actions/todoaction";
+import { useToDos } from "./todosProvider";
 const AddTodo = () => {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [status, setStatus] = React.useState("pending");
   const [isLoading, setIsLoading] = React.useState(false);
+  const {AddToDo} = useToDos()
   const {data:session}=useSession()
 
   const toast = useToast();
 
+  if(!session) return null
 
-
-  const handleTodoCreate = async () => {
+  const handleTodoCreate = () => {
+    if(!session) return
     setIsLoading(true);
     const todo = {
+      id:"",
       title,
       description,
       status,
-      userId: session?.user.id,
+      userId: session.user.id,
     };
-    await addTodo(todo);
-    setIsLoading(false);
-
-    setTitle("");
-    setDescription("");
-    setStatus("pending");
+    
+    AddToDo(todo)
 
     toast({ title: "Todo created successfully", status: "success" });
   };
@@ -73,7 +73,7 @@ const AddTodo = () => {
         <Button
           onClick={() => handleTodoCreate()}
           disabled={title.length < 1 || description.length < 1 || isLoading}
-          variantColor="teal"
+          color="teal"
           variant="solid"
         >
           Add
