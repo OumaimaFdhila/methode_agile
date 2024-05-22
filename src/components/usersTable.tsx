@@ -78,7 +78,7 @@ export default function UserTable(){
 
         if (roleFilter !== "all") {
             filteredUsers = filteredUsers.filter((user) =>
-            Array.from(roleFilter).includes((user.role!)),
+            Array.from(roleFilter).includes((user.role!.toLowerCase())),
           );
         }
         return filteredUsers;
@@ -179,11 +179,8 @@ export default function UserTable(){
                     <DropdownItem key={"admin"} className="capitalize">
                         admin
                     </DropdownItem>
-                    <DropdownItem key={"teacher"} className="capitalize">
-                        teacher
-                    </DropdownItem>
-                    <DropdownItem key={"student"} className="capitalize">
-                        student
+                    <DropdownItem key={"user"} className="capitalize">
+                        user
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
