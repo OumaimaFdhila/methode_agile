@@ -6,7 +6,7 @@ import Footer from '@/components/footer'
 import AppSession from "@/contexts/AppSession";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-import { ChakraProvider } from "@chakra-ui/react";
+import { TimerProvider } from "@/components/timer/timerProvider";
 
 export const metadata: Metadata = {
   icons:"/dark_logo.png",
@@ -21,6 +21,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning lang="en" >
+      <TimerProvider>
       <body className="w-full h-full">
       <Providers>
       <AppSession>
@@ -34,6 +35,7 @@ export default async function RootLayout({
       </AppSession>
       </Providers>
       </body>
+      </TimerProvider>
     </html>
   );
 }
