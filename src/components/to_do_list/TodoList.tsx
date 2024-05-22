@@ -7,48 +7,28 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { DB } from "@/lib/firebase";
 import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-import { deleteTodo, toggleTodoStatus } from "@/app/api/toDoList/route";
+import { deleteTodo, toggleTodoStatus } from "@/server actions/todoaction";
+import { useToDos } from "./todosProvider";
 const TodoList = () => {
-  const [todos, setTodos] = React.useState([]);
-  const {data:session}=useSession()
-  console.log(session.user.id)
+  const {todos, update} = useToDos();
 
   const toast = useToast();
-  const refreshData = () => {
 
-    const q = query(collection(DB, "todo"), where("user", "==", session.user.id));
-
-
-    onSnapshot(q, (querySnapchot) => {
-      let ar = [];
-      querySnapchot.docs.forEach((doc) => {
-        ar.push({ id: doc.id, ...doc.data() });
-      });
-      setTodos(ar);
-    });
-  };
-
-  useEffect(() => {
-    refreshData();
-  }, []);
-
-  const handleTodoDelete = async (id) => {
+  const handleTodoDelete = async (id:string) => {
     if (confirm("Are you sure you wanna delete this todo?")) {
-      deleteTodo(id);
+      await deleteTodo(id);
+      update()
       toast({ title: "Todo deleted successfully", status: "success" });
     }
   };
 
-  const handleToggle = async (id, status) => {
+  const handleToggle = async (id:string, status:string) => {
     const newStatus = status == "completed" ? "pending" : "completed";
     await toggleTodoStatus({ docId: id, status: newStatus });
+    update()
     toast({
-      title: ```Todo marked ${newStatus}```,
+      title: `Todo marked ${newStatus}`,
       status: newStatus == "completed" ? "success" : "warning",
     });
   };
