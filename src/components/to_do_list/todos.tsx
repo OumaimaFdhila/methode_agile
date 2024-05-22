@@ -8,8 +8,10 @@ import { ToDosProvider } from "./todosProvider"
 export default function Todos() {
     return(
         <ToDosProvider>
-            <AddTodo/>
-            <TodoList/>
+            <div className="flex flex-col w-full h-full px-5">
+                <AddTodo/>
+                <TodoList/>
+            </div>
         </ToDosProvider>
     )
 }

@@ -60,7 +60,7 @@ export default function AddCommentArea({IsReply = false, ReplyTo="", parentComme
                     <Button 
                         color="default" 
                         variant="bordered" 
-                        className="flex-grow-0"
+                        className="flex-grow-0 text-[#d4560d] text-md"
                         onPress={()=>{
                             setIsFocused(false)
                             setContent("")
@@ -68,9 +68,8 @@ export default function AddCommentArea({IsReply = false, ReplyTo="", parentComme
                             cancel
                     </Button>
                     <Button 
-                        color="primary" 
                         variant="solid" 
-                        className="flex-grow-0"
+                        className="flex-grow-0 bg-[#d4560d] text-white text-md"
                         onPress={addComment}>
                             Comment
                     </Button>
