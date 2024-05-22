@@ -2,6 +2,7 @@ import  Calendar  from "@/components/calendar"
 import CommentsComponent from "@/components/comments/commentsComponent"
 import SendMailButton from "@/components/mailsComponents/SendMailButton"
 import MailTable from "@/components/mailsComponents/mailTable"
+import AddTodo from "@/components/to_do_list/AddTodo"
 import UserTable from "@/components/usersTable"
 
 export default function Profile(){
@@ -25,6 +26,7 @@ export default function Profile(){
 
             <div className="w-[50%] h-full flex justify-end "> 
                 <Calendar/>
+                <AddTodo/>
                 
             </div>
         </div>
