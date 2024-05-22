@@ -7,7 +7,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import SendMailButton from "../mailsComponents/SendMailButton";
 
-export default function Sidebar({hundleDash,hundleCalen,hundleMail,hundleUser}:{hundleDash:()=>void,hundleCalen:()=>void,hundleMail:()=>void,hundleUser:()=>void}){
+export default function Sidebar({hundleDash,hundleCalen,hundleMail,hundleUser,hundleTask}:{hundleDash:()=>void,hundleCalen:()=>void,hundleMail:()=>void,hundleUser:()=>void,hundleTask:()=>void}){
 
 
     return(
@@ -23,7 +23,7 @@ export default function Sidebar({hundleDash,hundleCalen,hundleMail,hundleUser}:{
 
                 <SendMailButton/>
 
-                <Button variant="light" startContent={<MdAddTask/>}  className="text-black text-md text-start flex justify-start w-full mb-2">Add Task</Button>
+                <Button onClick={hundleTask} variant="light" startContent={<MdAddTask/>}  className="text-black text-md text-start flex justify-start w-full mb-2">Tasks</Button>
 
                 <Button onClick={hundleUser} variant="light" startContent={<FaRegUser/>}  className="text-black text-md text-start flex justify-start w-full mb-2">Users List</Button>
                 

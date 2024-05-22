@@ -12,8 +12,8 @@ export default function Timer() {
     const seconds = time? time%60 : 0
 
     return (
-        <div className="min-w-[200px] min-h-[100px] flex justify-center items-center shadow-md m-4 rounded-lg flex-col gap-2">
-            <p><span>{minutes.toString().padStart(2, "0")}</span>:<span>{seconds.toString().padStart(2, "0")}</span></p>
+        <div className="w-[600px] h-[200px] flex justify-center items-center shadow-md m-4 rounded-lg flex-col gap-2">
+            <p><span className="text-2xl">{minutes.toString().padStart(2, "0")}</span>:<span className="text-2xl">{seconds.toString().padStart(2, "0")}</span></p>
             <div className="flex justify-center items-center gap-2">
                 <Button
                     isIconOnly
@@ -28,6 +28,7 @@ export default function Timer() {
                     size="lg"
                     radius="full"
                     color="success"
+                    className="text-white"
                     isDisabled={isRunning}
                     onPress={start}>
                     <FaPlay />
@@ -35,6 +36,7 @@ export default function Timer() {
                 <Button
                     isIconOnly
                     size="sm"
+                    className="text-white"
                     radius="full"
                     isDisabled={!isRunning}
                     color="warning"

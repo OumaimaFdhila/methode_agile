@@ -1,31 +1,30 @@
 "use client"
 import  Calendar  from "@/components/calendar"
-import CommentsComponent from "@/components/comments/commentsComponent"
-import SendMailButton from "@/components/mailsComponents/SendMailButton"
 import MailTable from "@/components/mailsComponents/mailTable"
 import Sidebar from "@/components/sidebar/sidebar"
 import UserTable from "@/components/usersTable"
-import AddTodo from "@/components/to_do_list/AddTodoList"
-import TodoList from "@/components/to_do_list/TodoList"
 import { useState } from "react"
 import Dashboard from "@/components/profile_components/dashboard"
+import Task from "@/components/profile_components/task"
 export default function Profile(){
 
     const [dash,setDash]=useState(true)
     const [mail,setMail]=useState("")
     const [user,setUser]=useState("")
+    const [task,setTask]=useState("")
 
-    const hundleDash=()=>{setDash(true);setMail("");setUser("")}
-    const hundleCalen=()=>{setDash(false);setMail("");setUser("");setDash(false)}
-    const hundleMail=()=>{setMail("mail");setUser("");setDash(false)}
-    const hundleUser=()=>{setUser("user");setMail("");setDash(false)}
+    const hundleDash=()=>{setDash(true);setMail("");setUser("");setTask("")}
+    const hundleCalen=()=>{setDash(false);setMail("");setUser("");setTask("")}
+    const hundleMail=()=>{setMail("mail");setUser("");setDash(false);setTask("")}
+    const hundleUser=()=>{setUser("user");setMail("");setDash(false);setTask("")}
+    const hundleTask=()=>{setTask("task");setUser("");setMail("");setDash(false)}
 
     return(
         
         <div className="w-full h-screen bg-white overflow-hidden flex justify-between">
 
-            <Sidebar  hundleDash={hundleDash} hundleCalen={hundleCalen} hundleMail={hundleMail} hundleUser={hundleUser}/>
-            {dash?<Dashboard/>:mail=="mail"?<MailTable/>:user=="user"?<UserTable/>:<Calendar/>}
+            <Sidebar  hundleDash={hundleDash} hundleCalen={hundleCalen} hundleMail={hundleMail} hundleUser={hundleUser} hundleTask={hundleTask}/>
+            {dash?<Dashboard/>:mail=="mail"?<MailTable/>:user=="user"?<UserTable/>:task=="task"?<Task/>:<Calendar/>}
             
 
         </div>

@@ -79,7 +79,7 @@ export default function MailSendModal(
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="text-2xl text-primary flex items-center "><TbMailUp className="mr-2"/>Send Mail</ModalHeader>
+              <ModalHeader className="text-2xl text-[#d4560d] flex items-center "><TbMailUp className="mr-2"/>Send Mail</ModalHeader>
               <ModalBody className="w-full ">
                 <Input
                     onFocus={()=>{setIsInvalid("")}}
@@ -116,10 +116,10 @@ export default function MailSendModal(
 
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" className="text-md font-semibold"  onPress={onClose}>
+                <Button color="default"  variant="flat" className="text-md font-semibold text-[#d4560d]"  onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" className="text-md font-semibold"  onPress={()=>{sendMail(onClose)}}>
+                <Button className="text-md font-semibold bg-[#d4560d] text-white"  onPress={()=>{sendMail(onClose)}}>
                   send
                 </Button>
               </ModalFooter>
