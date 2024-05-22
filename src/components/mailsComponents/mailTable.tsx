@@ -84,7 +84,7 @@ export default function MailTable(){
 
         if (roleFilter !== "all") {
           filteredMails = filteredMails.filter((mail) =>
-            Array.from(roleFilter).includes((mail.sender.role)),
+            Array.from(roleFilter).includes((mail.sender.role.toLowerCase())),
           );
         }
 
@@ -190,11 +190,8 @@ export default function MailTable(){
                     <DropdownItem key={"admin"} className="capitalize">
                         admin
                     </DropdownItem>
-                    <DropdownItem key={"teacher"} className="capitalize">
-                        teacher
-                    </DropdownItem>
-                    <DropdownItem key={"student"} className="capitalize">
-                        student
+                    <DropdownItem key={"user"} className="capitalize">
+                        user
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
